@@ -1,8 +1,8 @@
 [[redirects]]
-from = "/s/*"
-to = "https://api.r6pl.com/test"
+from = "/s/id=:id"
+to = "https://api.r6pl.com/test?query=:id"
 status = 200
-query = {path = ":path"}
+force = true
 headers = {X-From = "Netlify"}
 
 [[redirects]]
