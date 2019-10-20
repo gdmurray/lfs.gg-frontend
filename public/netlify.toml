@@ -1,0 +1,11 @@
+[[redirects]]
+from = "/s/*"
+to = "https://api.r6pl.com/test"
+status = 200
+query = {path = ":path"}
+headers = {X-From = "Netlify"}
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
