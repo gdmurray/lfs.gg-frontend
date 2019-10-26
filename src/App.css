@@ -20,3 +20,18 @@
 .App-link {
   color: #09d3ac;
 }
+
+.app-content{
+  height: 100% !important;
+}
+.core-content{
+  margin-left: 200px !important;
+  min-height: 100%;
+}
+
+.page-content{
+  top: 47px;
+  position: relative;
+  height: 100%;
+}
+

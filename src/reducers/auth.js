@@ -1,10 +1,12 @@
 import jwtDecode from 'jwt-decode'
 import * as auth from '../actions/auth'
+
 const initialState = {
   access: undefined,
   refresh: undefined,
   errors: {},
 }
+
 export default (state=initialState, action) => {
   switch(action.type) {
     case auth.LOGIN_SUCCESS:
@@ -36,6 +38,8 @@ export default (state=initialState, action) => {
              action.payload.response || 
                 {'non_field_errors': action.payload.statusText},
       }
+    case auth.USER_LOGOUT:
+      return {...initialState}
     default:
       return state
     }

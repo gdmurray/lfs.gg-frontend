@@ -1,0 +1,34 @@
+.app-sidebar{
+    display: flex !important;
+    width: 200px !important;
+    overflow: hidden !important;
+    overflow-y: hidden !important;
+    overflow-x: hidden !important;
+    background: white;
+}
+
+.app-navbar{
+    left: 200px !important;
+    height: 50px !important;
+}
+
+body{
+    background: #FCFDFF;
+}
+
+.right-menu{
+    margin-right: 200px !important;
+}
+
+.nav-icon > i,
+.nav-user-dropdown-icon > i{
+    font-size: 1.5rem !important;
+    margin-right: 0px !important;
+}
+.nav-user-dropdown{
+    width: 150px !important;
+}
+
+.notif-label{
+    margin-left: 0px !important;
+}

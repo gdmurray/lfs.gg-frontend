@@ -1,6 +1,8 @@
 import storage from 'redux-persist/es/storage'
-import { apiMiddleware } from 'redux-api-middleware';
+//import { apiMiddleware } from 'redux-api-middleware';
+import apiMiddleware from './middleware';
 import { applyMiddleware, createStore, compose } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension';
 import { createFilter   } from 'redux-persist-transform-filter';
 import { persistReducer, persistStore } from 'redux-persist'
 import { routerMiddleware } from 'connected-react-router'
@@ -24,9 +26,9 @@ export default function configureStore(preloadedState) {
         createRootReducer(history))
     
     const store = createStore(
-        createRootReducer(history),
+        reducer,
         preloadedState,
-        compose(
+        composeWithDevTools(
             applyMiddleware(
                 apiMiddleware,
                 routerMiddleware(history)
@@ -34,7 +36,6 @@ export default function configureStore(preloadedState) {
         )
     )
 
-    persistStore(store);
-
-    return store
+    const persistor = persistStore(store);
+    return {store: store, persistor: persistor}
 }

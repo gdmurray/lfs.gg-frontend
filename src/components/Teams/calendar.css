@@ -1,0 +1,35 @@
+.calendar-wrapper{
+    padding: 1rem;
+    background: white;
+}
+
+.calendar-scrim-table{
+    padding: 1rem;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+.calendar-scrim-table .table-content{
+    height: 500px;
+}
+
+.ligma{
+    display:none !important;
+}
+
+.selected{
+box-shadow: 0 0 5px rgba(81, 203, 238, 1) !important;
+  border: 1px solid rgba(81, 203, 238, 1) !important;
+  -webkit-transition: all 0.50s ease-in-out;
+  -moz-transition: all 0.50s ease-in-out;
+  -ms-transition: all 0.50s ease-in-out;
+  -o-transition: all 0.50s ease-in-out;
+}
+
+.fc-event{
+    cursor: pointer !important;
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+}
