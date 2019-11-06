@@ -1,0 +1,8 @@
+<svg id="Group_12" data-name="Group 12" xmlns="http://www.w3.org/2000/svg" width="89" height="89" viewBox="0 0 89 89">
+  <rect id="Rectangle_6" data-name="Rectangle 6" width="62.933" height="62.933" rx="10" transform="translate(0 44.5) rotate(-45)"/>
+  <g id="dota-2" transform="translate(28.154 28.154)">
+    <g id="Group_7" data-name="Group 7">
+      <path id="Path_13" data-name="Path 13" d="M32.693,0H28.635L26.946.845,25.256,0H17.3L15.388.958H10.094L8.178,0H0V15.388L.958,17.3V22.6L0,24.514v8.178H16.346l1.689-.845,1.689.845H32.693V19.725l-.845-1.689.845-1.689ZM8.62,26.946,5.747,24.072V18.326l8.62,8.62Zm17.368,0H22.157l-2.483-2.918-.512-2.08-1.971-.838-.845-.993L5.747,7.662,7.662,5.747l8.684,6.527,10.6,7.967Zm.958-12.579-8.62-8.62h5.747L26.946,8.62Z" fill="red"/>
+    </g>
+  </g>
+</svg>

@@ -8,7 +8,6 @@ export default class LoginForm extends Component {
     }
 
     handleInputChange = (event) => {
-        console.log(event.target.type);
         const target = event.target, value = target.type ===
             'checkbox' ? target.checked : target.value,
             name = target.name

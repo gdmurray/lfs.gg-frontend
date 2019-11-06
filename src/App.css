@@ -1,3 +1,9 @@
+:root{
+  --theme-primary-color: #031B4D;
+  --theme-primary-complement: #FF0057;
+  --theme-landing-form-color: #ECECEC;
+  --theme-landing-secondary-color:#6B7282;
+}
 .App {
   text-align: center;
 }
