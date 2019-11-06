@@ -296,7 +296,8 @@ body{
 }
 
 .games-list img:not(.active){
-    opacity: 30%;
+    opacity: 30% !important;
+    fill-opacity: 30% !important;
 }
 
 .title-header{
