@@ -1,5 +1,6 @@
 export const BACKEND_API = process.env.REACT_APP_BACKEND_URL ? process.env.REACT_APP_BACKEND_URL : 'https://api.r6pl.com';
 
+export const REGISTER_USER_URL = BACKEND_API + "/api/user/register/";
 export const AUTH_OBTAIN_TOKEN = BACKEND_API + '/api/auth/token/obtain/';
 export const AUTH_REFRESH_TOKEN = BACKEND_API + '/api/auth/token/refresh/';
 export const USER_INFO_SELF = BACKEND_API + '/api/user/';
