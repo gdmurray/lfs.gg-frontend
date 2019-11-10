@@ -15,7 +15,9 @@ import Login from './containers/Login';
 import LoadingView from "./components/LoadingView";
 import PrivateRoute from './containers/PrivateRoute';
 import TeamHome from "./containers/Team/TeamHome";
+import HomePageLogic from "./containers/HomePageLogic";
 import HomepageLayout from './components/Landing/Landing';
+import Register from './containers/Register';
 const {store, persistor} = configureStore(history)
 
 ReactDOM.render((
@@ -23,8 +25,9 @@ ReactDOM.render((
       <PersistGate loading={<LoadingView />} persistor={persistor}>
           <ConnectedRouter history={history}>
           <Switch>
-              <Route exact path="/" component={HomepageLayout}/>
+              <Route exact path="/" component={HomePageLogic}/>
               <Route exact path="/login" component={Login}/>
+              <Route exact path="/register" component={Register}/>
               <PrivateRoute path="/team" component={TeamHome}/>
           </Switch>
           </ConnectedRouter>

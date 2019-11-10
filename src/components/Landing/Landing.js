@@ -88,7 +88,7 @@ const DesktopHeading = () => (
 
 const MobileHeading = () => (
   <div className='landing-header-content mobile' textAlign='right'>
-    <img src={process.env.PUBLIC_URL + "/img/buck_r6s.png"} className='operator' />
+    <img src={process.env.PUBLIC_URL + "/img/buck_r6s.png"} alt="R6S Buck" className='operator' />
     <div className='pattern' />
     <div className='header-content mobile'>
       <Header
@@ -409,6 +409,7 @@ const HomepageLayout = () => (
     </Container>
     <div id="features-container">
       <Container>
+        <div className="pattern"/>
         <Header as='h1' content='Features' textAlign='center' />
         <Grid columns='3' stackable>
           <Grid.Row>
@@ -450,12 +451,16 @@ const HomepageLayout = () => (
       <Grid columns='2' stackable>
         <Grid.Row>
           <Grid.Column width={10}>
+
             <Header as='h1' className='title-header' style={{ marginTop: '3rem', marginBottom: '2rem' }}>Register for updates</Header>
-            <p>Subscribe to our email newsletter to get updates on the development and releases of lfs.gg. We will only be sending out emails to inform you of new features, new games, and important updates.</p>
-            <Input action style={{ width: '80%' }} className='register-input'>
-              <input placeholder='Email Address' type='email' />
-              <Button className='register-button' content='Register' />
+            <p className="sub header">Subscribe to our email newsletter to get updates on the development and releases of lfs.gg. We will only be sending out emails to inform you of new features, new games, and important updates.</p>
+            <Form action="https://gmail.us5.list-manage.com/subscribe/post?u=176fc35dae2851698ac0b358d&amp;id=a4898f5b07" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+              <Input action style={{ width: '80%' }} className='register-input'>
+              <input placeholder='Email Address' type='email' name="EMAIL" required/>
+              <Button type="submit" value="Subscribe" name="subscribe" className='register-button' content='Register' />
             </Input>
+            </Form>
+            
             <p style={{ fontSize: '0.6rem', marginTop: '0.5rem', marginBottom: '4rem' }}><b>*Feel free to unsubscribe at any time if you no longer want to receive updates about this product.</b></p>
           </Grid.Column>
           <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>

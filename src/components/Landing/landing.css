@@ -109,6 +109,17 @@ body{
     position: absolute;
 }
 
+#features-container .pattern{
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="28" height="28"><image style="background-size: cover;" width="8" height="8" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAACqADAAQAAAABAAAACgAAAAAYsJrPAAAAaUlEQVQYGY3QSwrAIAxF0UZsJ7r/lcZJK9hcidCBVAN+OQR9cni11i7bJhunXz22FhG5OQuToWwLaFZgDZ9OM8RdwgTb0G1VGRhXCgPcKmDdkBWoG1CD51R+cM+y5wjymEhgfI4n6Qj8Bb3SHxLWZQOfAAAAAElFTkSuQmCC" /></svg>');
+    width: 100%;
+    z-index: 1;
+    right: 4rem;
+    top: 200px;
+    padding-left: 50px;
+    height: 520px;
+    position: absolute;
+}
+
 .mobile-cover-block{
     width: 100%;
     height: 60px;

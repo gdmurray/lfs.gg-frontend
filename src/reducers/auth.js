@@ -4,7 +4,8 @@ import * as auth from '../actions/auth'
 const initialState = {
   access: undefined,
   refresh: undefined,
-  errors: {},
+  loginErrors: {},
+  registerErrors: {}
 }
 
 export default (state=initialState, action) => {
@@ -19,7 +20,7 @@ export default (state=initialState, action) => {
           token: action.payload.refresh,
           ...jwtDecode(action.payload.refresh)
         },
-        errors: {}
+        loginErrors: {}
     }
     case auth.TOKEN_RECEIVED:
       return {
@@ -34,12 +35,34 @@ export default (state=initialState, action) => {
       return {
          access: undefined,
          refresh: undefined,
-         errors: 
+         loginErrors: 
              action.payload.response || 
                 {'non_field_errors': action.payload.statusText},
       }
+
+    
     case auth.USER_LOGOUT:
       return {...initialState}
+    
+    case auth.REGISTER_SUCCESS:
+      return {
+        ...state,
+        access: {
+          token: action.payload.access,
+          ...jwtDecode(action.payload.access)
+        },
+        refresh: {
+          token: action.payload.refresh,
+          ...jwtDecode(action.payload.refresh)
+        },
+        registerErrors: {}
+      }
+    case auth.REGISTER_FAILURE:
+      return {
+        access: undefined,
+        refresh: undefined,
+        registerErrors: action.payload.response
+      }
     default:
       return state
     }
@@ -73,5 +96,9 @@ export function isAuthenticated(state) {
   return !isRefreshTokenExpired(state)
 }
 export function errors(state) {
-   return  state.errors
+   return  state.loginErrors
+}
+
+export function registerErrors(state){
+  return state.registerErrors
 }

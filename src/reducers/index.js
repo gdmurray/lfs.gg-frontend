@@ -17,6 +17,7 @@ export const isAccessTokenExpired = state => fromAuth.isAccessTokenExpired(state
 export const refreshToken = state => fromAuth.refreshToken(state.auth)
 export const isRefreshTokenExpired = state => fromAuth.isRefreshTokenExpired(state.auth)
 export const authErrors = state => fromAuth.errors(state.auth)
+export const registerErrors = state => fromAuth.registerErrors(state.auth)
 export const serverMessage = state => fromEcho.serverMessage(state.echo)
 
 export function withAuth(headers={}) {
