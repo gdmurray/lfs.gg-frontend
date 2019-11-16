@@ -87,7 +87,7 @@ const DesktopHeading = () => (
 )
 
 const MobileHeading = () => (
-  <div className='landing-header-content mobile' textAlign='right'>
+  <div className='landing-header-content mobile' textalign='right'>
     <img src={process.env.PUBLIC_URL + "/img/buck_r6s.png"} alt="R6S Buck" className='operator' />
     <div className='pattern' />
     <div className='header-content mobile'>
@@ -415,7 +415,7 @@ const HomepageLayout = () => (
           <Grid.Row>
             <Grid.Column>
               <Card>
-                <Icon name='twitter' size='huge' style={{ textAlign: 'center' }} textAlign='center' />
+                <Icon name='twitter' size='huge' style={{ textAlign: 'center' }} textalign='center' />
                 <Header as='h3' textAlign='center'>Twitter Card Integration</Header>
                 <p>
                   Automatically generates your
@@ -424,7 +424,7 @@ const HomepageLayout = () => (
             </Grid.Column>
             <Grid.Column>
               <Card>
-                <Icon name='discord' size='huge' style={{ textAlign: 'center' }} textAlign='center' />
+                <Icon name='discord' size='huge' style={{ textAlign: 'center' }} textalign='center' />
                 <Header as='h3' textAlign='center'>Discord Integration</Header>
                 <p>
                   Automatically generates your
@@ -433,7 +433,7 @@ const HomepageLayout = () => (
             </Grid.Column>
             <Grid.Column>
               <Card>
-                <Icon name='calendar check' size='huge' style={{ textAlign: 'center' }} textAlign='center' />
+                <Icon name='calendar check' size='huge' style={{ textAlign: 'center' }} textalign='center' />
                 <Header as='h3' textAlign='center'>Google Calendar Integration</Header>
                 <p>
                   Automatically generates your
@@ -454,7 +454,7 @@ const HomepageLayout = () => (
 
             <Header as='h1' className='title-header' style={{ marginTop: '3rem', marginBottom: '2rem' }}>Register for updates</Header>
             <p className="sub header">Subscribe to our email newsletter to get updates on the development and releases of lfs.gg. We will only be sending out emails to inform you of new features, new games, and important updates.</p>
-            <Form action="https://gmail.us5.list-manage.com/subscribe/post?u=176fc35dae2851698ac0b358d&amp;id=a4898f5b07" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+            <Form action="https://gmail.us5.list-manage.com/subscribe/post?u=176fc35dae2851698ac0b358d&amp;id=a4898f5b07" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate" target="_blank" novalidate>
               <Input action style={{ width: '80%' }} className='register-input'>
               <input placeholder='Email Address' type='email' name="EMAIL" required/>
               <Button type="submit" value="Subscribe" name="subscribe" className='register-button' content='Register' />

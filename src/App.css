@@ -3,6 +3,8 @@
   --theme-primary-complement: #FF0057;
   --theme-landing-form-color: #ECECEC;
   --theme-landing-secondary-color:#6B7282;
+  --theme-body-color: #4D4F5C;
+  --theme-secondary-color: #ADB5C7;
 }
 .App {
   text-align: center;
@@ -39,5 +41,6 @@
   top: 47px;
   position: relative;
   height: 100%;
+  padding: 1rem 2rem 5rem;
 }
 

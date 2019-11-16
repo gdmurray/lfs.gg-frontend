@@ -1,12 +1,33 @@
 .app-sidebar{
-    display: flex !important;
     width: 200px !important;
     overflow: hidden !important;
     overflow-y: hidden !important;
     overflow-x: hidden !important;
     background: white;
+    padding-left: 0px !important;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 1 !important;
 }
 
+.app-sidebar .bottom{
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+}
+
+.team-dropdown-wrapper{
+    padding: 0.25rem;
+}
+.team-dropdown-wrapper .team-dropdown{
+    width: 100%;
+    min-width: unset !important;
+}
+
+.team-dropdown-wrapper .team-dropdown .text{
+    width: 85%;
+}
 .app-navbar{
     left: 200px !important;
     height: 50px !important;
@@ -31,4 +52,32 @@ body{
 
 .notif-label{
     margin-left: 0px !important;
+}
+
+.app-sidebar .side-element{
+    padding: 20px 0px 20px 0px !important;
+    border-radius: unset !important;
+    border-radius: 0px !important;
+    font-family: var(--theme-font) !important;
+    font-size: 1rem !important;
+    cursor: pointer;
+  }
+  
+  .side-element.active{
+    padding-bottom: 0px !important;
+  }
+
+  .side-element span{
+    padding-left: 20px;
+  }
+  
+  .side-element span i{
+    font-size: 14px;
+  }
+  .side-element>.title>.dropdown.icon{
+    margin-top: 0px !important;
+  }
+
+.side-element li{
+    padding: 1rem;
 }
