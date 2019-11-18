@@ -5,6 +5,7 @@
   --theme-landing-secondary-color:#6B7282;
   --theme-body-color: #4D4F5C;
   --theme-secondary-color: #ADB5C7;
+  --theme-landing-font: "Roboto",-apple-system, BlinkMacSystemFont, "Ubuntu", "Fira Sans", "Helvetica Neue", sans-serif;
 }
 .App {
   text-align: center;

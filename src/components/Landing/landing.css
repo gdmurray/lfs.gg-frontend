@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
+
 .landing{
     margin-right: -1px;
 }
@@ -9,9 +11,13 @@
 
 .landing-menu .right.item{
     color: white !important;
+    font-family: var(--theme-landing-font) !important;
+    font-weight: 500;
 }
 .landing-menu a.right.item{
     padding: 0.86rem !important;
+    font-family: var(--theme-landing-font) !important;
+    font-weight: 600;
 }
 .ui.secondary.inverted.menu .link.item, 
 .ui.secondary.inverted.menu a.item {
@@ -66,10 +72,32 @@ body{
     height: 540px;
 }
 
+.landing-header-container .header{
+    font-family: var(--theme-landing-font) !important;
+}
+
 .landing-header-container .pushable{
     width: 101%;
     padding-right: 2px !important;
 }
+
+#how-it-works .header,
+#how-it-works *[type=text]{
+    font-family: var(--theme-landing-font) !important;
+}
+.ui.button,
+.ui.text.container,
+.ui.container p,
+.footer-menu,
+.ui.container .header{
+    font-family: var(--theme-landing-font) !important;
+}
+
+.footer-menu a{
+    font-weight: 600 !important;
+}
+
+
 /*
 .landing-menu.mobile:after{
     content: " ";
@@ -283,6 +311,10 @@ body{
     color: var(--theme-primary-color);
 }
 
+#features-container .card > div{
+    font-family: var(--theme-landing-font) !important;
+}
+
 #features-container .card:not(.active) > div:not(.card-control){
     display: none;
     transition: opacity 1s ease-out;
@@ -479,9 +511,11 @@ body{
     border-radius: 20px !important;
     background: unset !important;
     color: white !important;
-    font-weight: 200 !important;
+    font-weight: 400 !important;
     padding: 0.75rem 1.5rem !important;
     transition: 0.3s all;
+    font-family: var(--theme-landing-font) !important;
+    font-weight: 600;
 }
 
 .beta-access-button:hover{
@@ -603,7 +637,12 @@ body{
     color: white;
 }
 
-.footer-icons{
+.footer-icons a{
     color: white !important;
 }
 
+#footer .footer-logo{
+    font-size: 1.2rem;
+    font-family: var(--theme-landing-font) !important;
+    font-weight: 800;
+}

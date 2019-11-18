@@ -393,7 +393,7 @@ const features = [
     {
       title: "Google Calendar Integration",
       icon: "calendar check",
-      content: "Have a problem with players not remembering scrims? Lfs can automatically invite players to a Google Calendar event to remind them of upcoming scrims to keep a consistent schedule.",
+      content: "Have a problem with players not remembering scrims? lfs can automatically invite players to a Google Calendar event to remind them of upcoming scrims to keep a consistent schedule.",
       open: "calendarOpen"
     },
     {
@@ -421,11 +421,8 @@ class HomepageLayout extends Component {
     leagueOpen: false
   }
   handleOpen = () => this.setState({ open: true });
-  handleClose = () => this.setState({ open: false })
-  toggleFeature = (feature) => {
-    console.log(feature);
-    this.setState({[feature]: !this.state[feature] })
-  }
+  handleClose = () => this.setState({ open: false });
+  toggleFeature = (feature) => this.setState({[feature]: !this.state[feature] });
 
   renderFeatures = () => {
     return features.map((item, i) => {
@@ -544,10 +541,11 @@ class HomepageLayout extends Component {
                       <Header as='h2' content="Message Us" style={{ color: 'var(--theme-primary-color)', marginTop: '2rem' }} />
                       <p>Feel free to send us a message if you have any questions, concerns, or suggestions!</p>
                       <div className="buttons-block">
-                        <Button className="contact-button" ><Icon name='mail' /> Email</Button>
-                        <Button className="contact-button" ><Icon name='twitter' /> Twitter</Button>
+                        <Button className="contact-button" onClick={()=> window.location.href='mailto:info@lfs.gg'}><Icon name='mail' /> Email</Button>
+                        <Button className="contact-button" onClick={() => document.getElementById("twitterId").click()}><Icon name='twitter' /> Twitter</Button>
                       </div>
                       <p style={{ marginTop: '1rem' }}>Or send us an email manually at <b style={{ color: 'var(--theme-primary-complement)' }}>info@lfs.gg</b></p>
+                      <a id="twitterId" style={{visibility: 'hidden'}} href="https://twitter.com/messages/compose?recipient_id=1185550472469463041" target="_blank">Twitter url</a>
                     </Container>
                   </Grid.Column>
                   <Grid.Column className="request-beta" textAlign="center">
@@ -586,9 +584,9 @@ class HomepageLayout extends Component {
           </Container>
           <div className="bottom-footer-container">
             <div className="footer-icons">
-              <Icon size='large' name='mail' />
-              <Icon size='large' name='twitter' />
-              <Icon size='large' name='discord' />
+              <a href="mailto:info@lfs.gg"><Icon size='large' name='mail' /></a>
+              <a href="https://twitter.com/messages/compose?recipient_id=1185550472469463041" rel="noopener noreferrer" target="_blank"><Icon size='large' name='twitter' /></a>
+              <a href="https://discord.gg/hk8avdN" rel="noopener noreferrer" target="_blank"><Icon size='large' name='discord' /></a>
             </div>
             <div className="footer-logo">
               <p>lfs.gg</p>
