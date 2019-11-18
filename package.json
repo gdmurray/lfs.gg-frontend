@@ -15,6 +15,7 @@
     "jwt-decode": "^2.2.0",
     "moment": "^2.24.0",
     "react": "^16.10.2",
+    "react-anchor-link-smooth-scroll": "^1.0.12",
     "react-dnd": "^9.4.0",
     "react-dom": "^16.10.2",
     "react-moment": "^0.9.6",
