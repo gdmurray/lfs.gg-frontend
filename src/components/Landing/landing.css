@@ -524,7 +524,7 @@ body{
 }
 
 .contact-grid > .row{
-    padding: 1rem 5rem !important;
+    padding: 1rem 2rem !important;
 }
 .contact-grid .column{
     padding: unset !important;
