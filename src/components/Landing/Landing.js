@@ -585,7 +585,7 @@ class HomepageLayout extends Component {
           <div className="bottom-footer-container">
             <div className="footer-icons">
               <a href="mailto:info@lfs.gg"><Icon size='large' name='mail' /></a>
-              <a href="https://twitter.com/messages/compose?recipient_id=1185550472469463041" rel="noopener noreferrer" target="_blank"><Icon size='large' name='twitter' /></a>
+              <a href="https://twitter.com/lfs__gg" rel="noopener noreferrer" target="_blank"><Icon size='large' name='twitter' /></a>
               <a href="https://discord.gg/hk8avdN" rel="noopener noreferrer" target="_blank"><Icon size='large' name='discord' /></a>
             </div>
             <div className="footer-logo">
