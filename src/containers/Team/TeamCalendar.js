@@ -1,6 +1,6 @@
 import React from 'react';
 import {fetchCalendarScrims} from "../../actions/calendar"
-import TeamCalendarComponent from "../../components/Teams/TeamCalendarComponent";
+import TeamCalendarComponent from "../../components/Team/TeamCalendarComponent";
 import { connect } from 'react-redux'
 
 const TeamCalendar = (props) => {

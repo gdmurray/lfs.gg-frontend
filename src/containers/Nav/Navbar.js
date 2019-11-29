@@ -10,11 +10,6 @@ class Navbar extends Component {
     render() {
         return (
             <Menu className='app-navbar' fixed='top'>
-                <Menu.Item as='a' header>
-                    <Image size='mini' src='/logo.png' style={{ marginRight: '1.5em' }} />
-                    Project Name
-                    </Menu.Item>
-                <Menu.Item as='a'>Home</Menu.Item>
                 <Menu.Menu position='right' className='right-menu'>
                     <Menu.Item as='a'>
                         <Icon name='bell outline' />

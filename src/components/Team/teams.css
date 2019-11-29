@@ -16,3 +16,8 @@
 .scrim-form input{
     height: 30px;
 }
+
+.scrim-time-cell{
+    display: flex;
+    justify-content: space-between;
+}

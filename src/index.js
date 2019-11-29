@@ -10,14 +10,13 @@ import {Route, Switch} from 'react-router'
 
 import 'semantic-ui-css/semantic.min.css'
 
-import App from "./App";
 import Login from './containers/Login';
 import LoadingView from "./components/LoadingView";
 import PrivateRoute from './containers/PrivateRoute';
 import TeamHome from "./containers/Team/TeamHome";
 import HomePageLogic from "./containers/HomePageLogic";
-import HomepageLayout from './components/Landing/Landing';
 import Register from './containers/Register';
+import "./App.css";
 const {store, persistor} = configureStore(history)
 
 ReactDOM.render((

@@ -47,29 +47,31 @@ export default class TeamCalendarComponent extends Component {
     _handleKeyDown = (event) => {
         switch (event.keyCode) {
             case 8:
-                var calendar = this.calendarRef.current.getApi();
-                const { calendarSelection, selection } = this.state;
-                if (calendarSelection || selection.length > 0) {
-                    var { newScrims } = this.state;
-                    var nsIds = newScrims.map(s => s.id);
-                    //var days = getDates(calendarSelection.start, calendarSelection.end);
-                    var del = [];
-                    console.log(calendarSelection, selection);
-                    var selectionEvents = this.getSelectedEventsFromCalendar(calendarSelection);
-                    var selectedEvents = selection.length > 0 ? selection.map(id => calendar.getEventById(id)) : selectionEvents;
-                    //console.log(selectedEvents);
-                    for (var evt of selectedEvents) {
-                        if(evt){
-                            if (nsIds.includes(evt.id)) {
-                                evt.remove()
-                                del.push(evt.id);
+                if(this.calendarRef.current){
+                    var calendar = this.calendarRef.current.getApi();
+                    const { calendarSelection, selection } = this.state;
+                    if (calendarSelection || selection.length > 0) {
+                        var { newScrims } = this.state;
+                        var nsIds = newScrims.map(s => s.id);
+                        //var days = getDates(calendarSelection.start, calendarSelection.end);
+                        var del = [];
+                        console.log(calendarSelection, selection);
+                        var selectionEvents = this.getSelectedEventsFromCalendar(calendarSelection);
+                        var selectedEvents = selection.length > 0 ? selection.map(id => calendar.getEventById(id)) : selectionEvents;
+                        //console.log(selectedEvents);
+                        for (var evt of selectedEvents) {
+                            if(evt){
+                                if (nsIds.includes(evt.id)) {
+                                    evt.remove()
+                                    del.push(evt.id);
+                                }
                             }
                         }
+                        newScrims = newScrims.filter(item => !del.includes(item.id))
+                        this.setState({
+                            newScrims: newScrims
+                        })
                     }
-                    newScrims = newScrims.filter(item => !del.includes(item.id))
-                    this.setState({
-                        newScrims: newScrims
-                    })
                 }
                 break;
             default:

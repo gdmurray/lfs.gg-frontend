@@ -18,8 +18,6 @@ export default class LoginForm extends Component {
     }
 
     onSubmit = (event) => {
-        console.log("Submitting");
-        console.log(this.state);
         event.preventDefault()
         this.props.onSubmit(this.state.username, this.state.password)
       }

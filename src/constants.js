@@ -7,3 +7,4 @@ export const USER_INFO_SELF = BACKEND_API + '/api/user/';
 export const TEMP_SCHEDULE_URL = BACKEND_API + "/api/team/8916f502-f5dc-11e9-b2b9-469ea25f7e20/calendar/scrims";
 
 export const UPDATE_SCRIM_URL = BACKEND_API + '/api/team/scrim/'
+export const TEAM_SCRIMS_LIST_URL = BACKEND_API + '/api/team/<IDENTIFIER>/scrims/';

@@ -11,6 +11,7 @@ const initialState = {
 export default (state=initialState, action) => {
   switch(action.type) {
     case auth.LOGIN_SUCCESS:
+      console.log(action);
       return {
         access: {
           token: action.payload.access,
@@ -41,10 +42,10 @@ export default (state=initialState, action) => {
       }
 
     
-    case auth.USER_LOGOUT:
+    case auth.USER_LOGOUT_FINISH:
       return {...initialState}
     
-    case auth.REGISTER_SUCCESS:
+    case auth.REGISTER_USER_SUCCESS:
       return {
         ...state,
         access: {
@@ -57,7 +58,7 @@ export default (state=initialState, action) => {
         },
         registerErrors: {}
       }
-    case auth.REGISTER_FAILURE:
+    case auth.REGISTER_USER_FAILURE:
       return {
         access: undefined,
         refresh: undefined,
