@@ -87,12 +87,14 @@ export function isAccessTokenExpired(state) {
   }
   return true
 }
+
 export function isRefreshTokenExpired(state) {
   if (state.refresh && state.refresh.exp) {
     return 1000 * state.refresh.exp - (new Date()).getTime() < 5000
   }
   return true
 }
+
 export function isAuthenticated(state) {
   return !isRefreshTokenExpired(state)
 }

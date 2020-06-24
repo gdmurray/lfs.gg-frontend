@@ -17,6 +17,8 @@ import TeamHome from "./containers/Team/TeamHome";
 import HomePageLogic from "./containers/HomePageLogic";
 import Register from './containers/Register';
 import "./App.css";
+import TeamPage from './containers/Team/TeamPage';
+import ScrimPage from './containers/Scrims/ScrimPage';
 const {store, persistor} = configureStore(history)
 
 ReactDOM.render((
@@ -28,6 +30,9 @@ ReactDOM.render((
               <Route exact path="/login" component={Login}/>
               <Route exact path="/register" component={Register}/>
               <PrivateRoute path="/team" component={TeamHome}/>
+
+              <Route path="/t/:id" component={TeamPage} />
+              <Route path="/scrim/:id" component={ScrimPage} />
           </Switch>
           </ConnectedRouter>
         </PersistGate>

@@ -1,10 +1,14 @@
 :root{
-  --theme-primary-color: #031B4D;
-  --theme-primary-complement: #FF0057;
+
   --theme-landing-form-color: #ECECEC;
   --theme-landing-secondary-color:#6B7282;
+
+  --theme-primary-color: #031B4D;
+  --theme-primary-complement: #FF0057;
   --theme-body-color: #4D4F5C;
   --theme-secondary-color: #ADB5C7;
+  --theme-menu-color: #838FA8;
+  --theme-font-roboto: "Roboto",-apple-system, BlinkMacSystemFont, "Ubuntu", "Fira Sans", "Helvetica Neue", sans-serif;
   --theme-landing-font: "Roboto",-apple-system, BlinkMacSystemFont, "Ubuntu", "Fira Sans", "Helvetica Neue", sans-serif;
 }
 .App {

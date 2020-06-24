@@ -1,9 +1,9 @@
 import { put, call } from 'redux-saga/effects';
 import {AUTH_OBTAIN_TOKEN} from "../constants";
+import { push } from 'connected-react-router'
 
 import { LOGIN_SUCCESS, LOGIN_FAILURE, REGISTER_SUCCESS, USER_LOGOUT_FINISH } from '../actions/auth';
 import { USER_INFO_REQUEST } from '../actions/userInfo';
-
 
 export function* registerSaga(payload) {
     try {
@@ -21,6 +21,7 @@ export function* logoutSaga(){
     yield put({ type: 'PURGE', key: 'root'});
     yield put({ type: 'PURGE', key: 'userInfo'});
     yield put({ type: USER_LOGOUT_FINISH });
+    yield put(push('/login'));
 }
 
 export function* loginSaga(payload){
