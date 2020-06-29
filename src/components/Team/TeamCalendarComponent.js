@@ -80,12 +80,12 @@ export default class TeamCalendarComponent extends Component {
     }
 
     componentDidMount() {
-        this.fetchScrims();
+        this.fetchScrims(this.props.activeTeam);
         document.addEventListener("keydown", this._handleKeyDown);
     }
 
     fetchScrims = () => {
-        this.props.fetchScrims('8916f502-f5dc-11e9-b2b9-469ea25f7e20');
+        this.props.fetchScrims(this.props.activeTeam);
     }
 
     

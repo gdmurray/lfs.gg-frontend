@@ -15,7 +15,9 @@ const AppSidebar = (props) => {
     )
 }
 const mapStateToProps = state => ({
+    pathname: state.router.location.pathname,
     userInfo: state.userInfo.data,
+    permissions: state.permissions,
     loading: state.userInfo.loading,
     activeTeam: state.userInfo.activeTeam,
     pathname: state.router.location.pathname,
