@@ -1,50 +1,60 @@
 import React, {Component} from 'react';
 import {AppSidebar, Navbar} from "../Nav/";
-import { Container, Menu, Header } from 'semantic-ui-react';
+import {Container, Menu, Header} from 'semantic-ui-react';
 //import TeamContent from "../../components/TeamContent";
+import NoTeamsFound from "../../components/Team/NoTeamsFound";
 import PrivateRoute from '../PrivateRoute';
 import TeamSettings from './TeamSettings';
 import TeamHomeComponent from '../../components/Team/TeamHomeComponent';
 
 import TeamScrims from "./TeamScrims";
 import TeamCalendar from "./TeamCalendar";
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux'
-import { push } from 'connected-react-router'
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux'
+import {push} from 'connected-react-router'
+import {fetchTeamHomeData} from "../../actions/teamData";
+import {TEAM_ROLES} from "../../constants";
+// TODO: Better Error Handling
+// TODO: Vary view based on authentication... gonna need some fun classes
 
-class TeamHome extends Component{
-    constructor(props){
+class TeamHome extends Component {
+    constructor(props) {
         super(props);
-        this.state ={
+        this.state = {
             activeTab: 'home'
         }
     }
-    handleItemClick = (e, { name }) => this.setState({ activeTab: name })
+
+    handleItemClick = (e, {name}) => this.setState({activeTab: name})
 
     routeDiff = (pathname, activeTab, source) => {
-        if(pathname.includes('settings')){
+        if (pathname.includes('settings')) {
             pathname = '/team/settings';
         }
 
-        if(activeTab !== this.urlMap[pathname]){
+        if (activeTab !== this.urlMap[pathname]) {
             this.setState({
                 activeTab: this.urlMap[pathname]
             })
         }
     }
-    
-    componentWillReceiveProps(props){
+
+    componentWillReceiveProps(props) {
         this.routeDiff(props.location.pathname, this.state.activeTab, 'componentWillReceiveProps');
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.routeDiff(this.props.location.pathname, this.state.activeTab, 'componentDidMount');
+        if (this.props.activeTeam !== undefined) {
+            // TODO: Add Last fetched flag, so we can keep the persisted data
+            this.props.fetchTeamHomeData(this.props.activeTeam);
+        }
     }
 
     handleTabClick = (e, {name}) => {
         const {activeTab} = this.state;
         var url = e.target.getAttribute('data-url');
-        if(name !== activeTab){
+        if (name !== activeTab) {
             this.setState({
                 activeTab: name
             });
@@ -58,60 +68,92 @@ class TeamHome extends Component{
         '/team/scrims': 'scrims',
         '/team/settings': 'settings'
     }
-    
-    render(){
+
+    renderSettingsTab = (activeTab) => {
+        if(this.props.permissions.team_id === this.props.activeTeam){
+            if(this.props.permissions.role !== TEAM_ROLES.PLAYER){
+                return (
+                    <Menu.Menu position='right'>
+                        <Menu.Item
+                            name='settings'
+                            data-url="/team/settings"
+                            active={activeTab === 'settings'}
+                            onClick={this.handleTabClick}
+                        />
+                    </Menu.Menu>
+                )
+            }
+        }
+        return null;
+    }
+
+    render() {
         const {activeTab} = this.state;
-        return (
-            <div className="app-content">
-                <AppSidebar />
-                <div className="core-content">
-                    <Navbar />
-                    <div className="page-content">
-                        <Header as="h2">Team Name</Header>
-                        <Menu pointing secondary className="lfs-menu-secondary">
-                            <Menu.Item
-                                data-url="/team"
-                                name='home'
-                                active={activeTab === 'home'}
-                                onClick={this.handleTabClick}
-                            />
-                            <Menu.Item
-                                name='calendar'
-                                data-url="/team/calendar"
-                                active={activeTab === 'calendar'}
-                                onClick={this.handleTabClick}
-                            />
-                            <Menu.Item
-                                name='scrims'
-                                data-url="/team/scrims"
-                                active={activeTab === 'scrims'}
-                                onClick={this.handleTabClick}
-                            />
-                            <Menu.Menu position='right'>
+        if (this.props.activeTeam) {
+            return (
+                <div className="app-content">
+                    <AppSidebar/>
+                    <div className="core-content">
+                        <Navbar/>
+                        <div className="page-content">
+                            <Header as="h2">{this.props.teamData.data.name}</Header>
+                            <Menu pointing secondary className="lfs-menu-secondary">
                                 <Menu.Item
-                                name='settings'
-                                data-url="/team/settings"
-                                active={activeTab === 'settings'}
-                                onClick={this.handleTabClick}
+                                    data-url="/team"
+                                    name='home'
+                                    active={activeTab === 'home'}
+                                    onClick={this.handleTabClick}
                                 />
-                            </Menu.Menu>
-                        </Menu>
-                        <div className="team-inner-content">
-                            <PrivateRoute exact path={`${this.props.match.path}/`} component={TeamHomeComponent}/>
-                            <PrivateRoute exact path={`${this.props.match.path}/calendar`} component={() => <TeamCalendar />} />
-                            <PrivateRoute exact path={`${this.props.match.path}/scrims`} component={TeamScrims} />
-                            <PrivateRoute path={`${this.props.match.path}/settings`} component={TeamSettings} />
+                                <Menu.Item
+                                    name='calendar'
+                                    data-url="/team/calendar"
+                                    active={activeTab === 'calendar'}
+                                    onClick={this.handleTabClick}
+                                />
+                                <Menu.Item
+                                    name='scrims'
+                                    data-url="/team/scrims"
+                                    active={activeTab === 'scrims'}
+                                    onClick={this.handleTabClick}
+                                />
+                                {this.renderSettingsTab(activeTab)}
+                            </Menu>
+                            <div className="team-inner-content">
+                                <PrivateRoute exact path={`${this.props.match.path}/`} component={TeamHomeComponent}/>
+                                <PrivateRoute exact path={`${this.props.match.path}/calendar`} component={TeamCalendar}/>
+                                <PrivateRoute exact path={`${this.props.match.path}/scrims`} component={TeamScrims}/>
+                                <PrivateRoute path={`${this.props.match.path}/settings`} component={TeamSettings}/>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        )
+            )
+        } else {
+            return (
+                <div className="app-content">
+                    <AppSidebar/>
+                    <div className="core-content">
+                        <Navbar/>
+                        <div className="page-content">
+                            <NoTeamsFound/>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
     }
 }
+
+const mapStateToProps = state => ({
+    activeTeam: state.userInfo.activeTeam,
+    permissions: state.permissions.team,
+    teamData: state.teamData
+})
 const mapDispatchToProps = dispatch => bindActionCreators({
-    goToRoute: (url) => push(url)
+    goToRoute: (url) => push(url),
+    fetchTeamHomeData: (id) => fetchTeamHomeData(id)
 }, dispatch);
 
 
-export default connect(null, mapDispatchToProps)(TeamHome);
+export default connect(mapStateToProps, mapDispatchToProps)(TeamHome);
 

@@ -4,14 +4,29 @@ import auth, * as fromAuth from './auth.js'
 import echo, * as fromEcho from "./echo";
 import calendar, * as fromCalendar from "./calendar";
 import userInfo, * as fromUserInfo from './userInfo';
+import teams, * as fromTeams from "./teams";
 import teamScrims from "./teamScrims";
+import permissions from "./permissions";
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
+import teamData, * as fromTeamData from "./teamData";
 
 const userInfoPersistConfig = {
   key: 'userInfo',
   storage: storage,
   blacklist: ['loading']
+}
+
+const teamDataPersistConfig = {
+  key: 'data',
+  storage: storage,
+  blacklist: ['loading', 'error']
+}
+
+const permissionsPersistConfig = {
+  key: 'permissions',
+  storage: storage,
+  whitelist: ['team', 'league']
 }
 
 export default (history) => combineReducers({
@@ -20,6 +35,9 @@ export default (history) => combineReducers({
   echo: echo,
   calendar: calendar,
   teamScrims: teamScrims,
+  teams: teams,
+  permissions: persistReducer(permissionsPersistConfig, permissions),
+  teamData: persistReducer(teamDataPersistConfig, teamData),
   userInfo: persistReducer(userInfoPersistConfig, userInfo),
 })
 

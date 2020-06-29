@@ -11,7 +11,9 @@ const TeamCalendar = (props) => {
 
 
 const mapStateToProps = state => ({
-    scrims: state.calendar.scrims
+    scrims: state.calendar.scrims,
+    activeTeam: state.userInfo.activeTeam,
+    permissions: state.permissions.team
 })
 const mapDispatchToProps = (dispatch) => ({
     fetchScrims: (teamId, query='') => {

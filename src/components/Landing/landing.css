@@ -242,6 +242,7 @@ body{
 
 .landing-h1{
     color: var(--theme-primary-color) !important;
+    margin-bottom: 2rem !important;
     font-size: 3rem !important;
 }
 
@@ -560,6 +561,7 @@ body{
 }
 
 .contact-grid .beta-button{
+    margin-top: 1rem;
     box-shadow: 0 0 0 1px white inset !important;
     border-radius: 20px !important;
     background: unset !important;

@@ -1,9 +1,9 @@
 .app-sidebar{
-    width: 200px !important;
+    width: 250px !important;
     overflow: hidden !important;
     overflow-y: hidden !important;
     overflow-x: hidden !important;
-    background: white;
+    background: var(--theme-primary-color);
     padding-left: 0px !important;
     display: flex !important;
     flex-direction: column;
@@ -28,17 +28,62 @@
 .team-dropdown-wrapper .team-dropdown .text{
     width: 85%;
 }
+
+.top .vertical.menu {
+    width: 100% !important;
+}
+
+.item.app-header{
+    padding-top: 2rem !important;
+}
+.item.app-header > img{
+    margin: 0 auto !important;
+}
 .app-navbar{
-    left: 200px !important;
+    left: 250px !important;
     height: 50px !important;
 }
 
+.App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.sidebar-divider {
+    border-color: var(--theme-secondary-color);
+    margin-left: 2rem;
+    margin-right: 1.5rem;
+    border-width: 1px;
+    border-bottom: unset;
+}
+
+.sidebar-tabs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.sidebar-tabs > div.active{
+    border-bottom: 2px solid var(--theme-primary-complement);
+    padding-bottom: 13px;
+}
+
+.sidebar-tabs > div{
+    padding-bottom: 15px;
+    cursor: pointer;
+}
 body{
     background: #FCFDFF;
 }
 
 .right-menu{
-    margin-right: 200px !important;
+    margin-right: 250px !important;
 }
 
 .nav-icon > i,
@@ -55,28 +100,49 @@ body{
 }
 
 .app-sidebar .side-element{
-    padding: 20px 0px 20px 0px !important;
     border-radius: unset !important;
     border-radius: 0px !important;
     font-family: var(--theme-font) !important;
     font-size: 1rem !important;
-    cursor: pointer;
-  }
+    padding-left: 0.5rem;
+}
   
-  .side-element.active{
-    padding-bottom: 0px !important;
-  }
+.side-element.active{
+padding-bottom: 0px !important;
+}
 
-  .side-element span{
-    padding-left: 20px;
-  }
-  
-  .side-element span i{
-    font-size: 14px;
-  }
-  .side-element>.title>.dropdown.icon{
-    margin-top: 0px !important;
-  }
+.side-element > span{
+    padding-left: 15px;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--theme-secondary-color);
+}
+
+.side-element .menu > .item {
+    font-size: 18px !important;
+    color: white !important;
+    display: flex !important;
+    flex-direction: row !important;
+    padding-bottom: .8rem !important;
+}
+
+.side-element .menu > .item > div {
+    width: 30px;
+}
+.side-element .menu > .item img{
+    margin-right: 1rem !important;
+}
+.side-element .menu{
+    padding-left: 15px;
+    margin-top: 2px !important;
+}
+
+.side-element span i{
+font-size: 14px;
+}
+.side-element>.title>.dropdown.icon{
+margin-top: 0px !important;
+}
 
 .side-element li{
     padding: 1rem;
