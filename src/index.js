@@ -20,6 +20,8 @@ import TeamCreate from "./containers/Team/TeamCreate";
 import "./App.css";
 import {ROUTES} from "./routes";
 import Teams from "./containers/Team/Teams";
+import TeamPage from './containers/Team/TeamPage';
+import ScrimPage from './containers/Scrims/ScrimPage';
 
 const {store, persistor} = configureStore(history)
 
@@ -34,6 +36,8 @@ ReactDOM.render((
                     <Route exact path={ROUTES.CREATE_TEAM} component={TeamCreate}/>
                     <Route exact path={ROUTES.TEAMS} component={Teams}/>
                     <PrivateRoute path={ROUTES.TEAM_HOME} component={TeamHome}/>
+                    <Route path="/t/:id" component={TeamPage} />
+                    <Route path="/scrim/:id" component={ScrimPage} />
                 </Switch>
             </ConnectedRouter>
         </PersistGate>

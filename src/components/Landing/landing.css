@@ -268,6 +268,7 @@ body{
 
 #features-container{
     height: auto;
+    width: 101%;
     min-height: 400px;
     background: var(--theme-primary-color);
     margin-top: 200px;

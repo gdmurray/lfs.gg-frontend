@@ -4,8 +4,6 @@ import { push } from 'connected-react-router';
 import {LOGIN_SUCCESS, LOGIN_FAILURE, REGISTER_SUCCESS, USER_LOGOUT_FINISH} from '../actions/auth';
 import {USER_INFO_REQUEST} from '../actions/userInfo';
 import {withAuth} from "../reducers";
-
-
 export function* registerSaga(payload) {
     try {
         //const response = yield call(registerUserService, payload);
@@ -19,10 +17,10 @@ export function* registerSaga(payload) {
 
 export function* logoutSaga() {
     yield put({type: 'PURGE'})
-    yield put({type: 'PURGE', key: 'root'});
-    yield put({type: 'PURGE', key: 'userInfo'});
-    yield put({type: USER_LOGOUT_FINISH});
-    yield put(push("/"))
+    yield put({ type: 'PURGE', key: 'root'});
+    yield put({ type: 'PURGE', key: 'userInfo'});
+    yield put({ type: USER_LOGOUT_FINISH });
+    yield put(push('/login'));
 }
 
 export function* loginSaga(payload) {

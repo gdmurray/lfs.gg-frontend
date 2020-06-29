@@ -7,7 +7,7 @@ export const FETCH_TEAM_SCRIM_REQUEST = "@@teamScrims/FETCH_TEAM_SCRIM_REQUEST"
 export const FETCH_TEAM_SCRIM_SUCCESS = "@@teamScrims/FETCH_TEAM_SCRIM_SUCCESS"
 export const FETCH_TEAM_SCRIM_FAILURE = "@@teamScrims/FETCH_TEAM_SCRIM_FAILURE"
 
-export const fetchTeamScrims = (team, query='') => ({
+export const fetchTeamScrims = (team, query='') => (console.log('FETCH SCRIMS'), {
     [RSAA]: {
         endpoint: TEAM_SCRIMS_LIST_URL.replace("<IDENTIFIER>", team) + query,
         method: 'GET',
