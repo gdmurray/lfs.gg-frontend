@@ -1,3 +1,3 @@
-export {default as TeamPrivacyComponent} from "./TeamPrivacyComponent";
+export {default as TeamRolesForm } from "./TeamRolesForm";
 export {default as TeamSettingsComponent} from "./TeamSettingsComponent";
-export {default as TeamRolesComponent} from "./TeamRolesComponent";
+export {default as TeamSettingsForm} from "./TeamSettingsForm";

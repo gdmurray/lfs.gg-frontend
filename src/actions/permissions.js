@@ -6,7 +6,7 @@ export const FETCH_USER_TEAM_PERMISSIONS_REQUEST = "@@permissions/FETCH_USER_TEA
 export const FETCH_USER_TEAM_PERMISSIONS_SUCCESS = "@@permissions/FETCH_USER_TEAM_PERMISSIONS_SUCCESS";
 export const FETCH_USER_TEAM_PERMISSIONS_FAILURE = "@@permissions/FETCH_USER_TEAM_PERMISSIONS_FAILURE";
 
-/*
+
 export const fetchUserTeamPermissions = (team) => ({
     [RSAA]: {
         endpoint: TEAM_USER_PERMISSIONS_URL.replace("<IDENTIFIER>", team),
@@ -16,4 +16,4 @@ export const fetchUserTeamPermissions = (team) => ({
             FETCH_USER_TEAM_PERMISSIONS_REQUEST, FETCH_USER_TEAM_PERMISSIONS_SUCCESS, FETCH_USER_TEAM_PERMISSIONS_FAILURE
         ]
     }
-})*/
+})

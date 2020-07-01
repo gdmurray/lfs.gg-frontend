@@ -19,6 +19,7 @@ const TeamCreate = (props) => {
 const mapStateToProps = state => ({
     team: state.teams,
     activeTeam: state.userInfo.activeTeam,
+    loading: state.teams.loading
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
     goToRoute: (url) => push(url),

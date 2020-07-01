@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { AppSidebar, Navbar } from '../Nav';
 import { ScrimPageComponent } from '../../components/Scrims';
+import AppWrapper from "../Nav/AppWrapper";
 
 class ScrimPage extends Component{
     componentDidMount(){
@@ -10,15 +11,9 @@ class ScrimPage extends Component{
     }
     render(){
         return (
-            <div className="app-content">
-                <AppSidebar />
-                <div className="core-content">
-                    <Navbar />
-                    <div className="page-content">
+            <AppWrapper>
                         <ScrimPageComponent {...this.props}/>
-                    </div>
-                </div>
-            </div>
+            </AppWrapper>
         )
     }
 }

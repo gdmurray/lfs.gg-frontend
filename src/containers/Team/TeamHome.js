@@ -4,7 +4,7 @@ import {Container, Menu, Header} from 'semantic-ui-react';
 //import TeamContent from "../../components/TeamContent";
 import NoTeamsFound from "../../components/Team/NoTeamsFound";
 import PrivateRoute from '../PrivateRoute';
-import TeamSettings from './TeamSettings';
+import TeamSettings from "./Settings/TeamSettings";
 import TeamHomeComponent from '../../components/Team/TeamHomeComponent';
 
 import TeamScrims from "./TeamScrims";

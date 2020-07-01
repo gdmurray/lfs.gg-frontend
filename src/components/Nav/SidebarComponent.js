@@ -4,7 +4,7 @@ import {
 } from "semantic-ui-react";
 
 function mapTeamsToOptions(teams){
-    return teams.map((item, i) => ({key: item.team.name, text: item.team.name, value: item.team.id}));
+    return teams.map((item, i) => ({key: item.team.id, text: item.team.name, value: item.team.id}));
 }
 
 class SidebarComponent extends Component{
@@ -26,16 +26,24 @@ class SidebarComponent extends Component{
 
     teamOptions = [
         {
+            name: "Home",
+            url: "/team",
+            icon: "/img/icons/home-solid-red.svg"
+        },
+        {
             name: "Schedule",
-            url: "/team/calendar"
+            url: "/team/calendar",
+            icon: "/img/icons/calendar-alt-regular.svg"
         },
         {
             name: "Scrims",
-            url: "/team/scrims"
+            url: "/team/scrims",
+            icon: "/img/icons/swords-crossed-red.svg"
         },
         {
             name: "Settings",
-            url: "/team/settings"
+            url: "/team/settings",
+            icon: "/img/icons/cog-solid.svg"
         }
     ]
 
@@ -66,14 +74,12 @@ class SidebarComponent extends Component{
     }
 
     handleMenuItemClick = (e) => {
-        console.log(e);
         var url = e.currentTarget.getAttribute('data-url');
-        console.log(url);
         if(url !== undefined && url !== null) {
-            //console.log("go to url");
-            //this.props.goTo(url);
+            this.props.goTo(url);
         }
     }
+
     handleTeamChange = (e, data) => {
        const { value } = data;
        this.props.changeActiveTeam(value);
@@ -85,6 +91,8 @@ class SidebarComponent extends Component{
                 //console.log(this.props);
                 const{teams} = this.props.userInfo;
                 const{activeTeam} = this.props;
+                console.log(activeTeam);
+                console.log(teams);
                 return (
                     <div className="team-dropdown-wrapper">
                         <div className="dropdown-header">TEAM SELECTED</div>
@@ -93,12 +101,16 @@ class SidebarComponent extends Component{
                 )
             }else{
                 return (
-                    <div>You dont belong to a team</div>
+                    <div className="team-dropdown-error">
+                        You dont belong to a team
+                    </div>
                 )
             }
         }else{
             return (
-                <div>You dont belong to a team</div>
+                <div className="team-dropdown-error">
+                    You dont belong to a team
+                </div>
             )
         }
     }
@@ -106,21 +118,21 @@ class SidebarComponent extends Component{
     render(){
         const {activeTab} = this.state;
         return(
-            <Sidebar visible={true} className='app-sidebar' vertical onItemClick={() => console.log("MASTER MENU CLICK")}>
+            <Sidebar visible={true} className='app-sidebar'>
                 <div className="top">
                     <Menu secondary vertical>
                         <Menu.Item className="sidebar-logo">
-                            <Header as='h1' textAlign="center" className='app-header'><Image src={process.env.PUBLIC_URL + "/logo.png"}/></Header>
+                            <Header as='h1' textAlign="center" className='app-header'><img src={process.env.PUBLIC_URL + "/logo.svg"}/></Header>
                         </Menu.Item>
                         <Menu.Item className="sidebar-shortcuts">
                             <div data-url="/" className={activeTab === 0 ? 'active' : ''} onClick={this.handleMenuItemClick}>
                                 <Image alias="home" src={process.env.PUBLIC_URL + "/img/icons/home.svg"} />
                             </div>
-                            <div data-url="/team" className={activeTab === 1 ? 'active' : ''} onClick={this.handleMenuItemClick}>
-                                <Image alias="scrims" src={process.env.PUBLIC_URL + "/img/icons/scrims.svg"} />
+                            <div data-url="/scrims" className={activeTab === 1 ? 'active' : ''} onClick={this.handleMenuItemClick}>
+                                <Image alias="scrims" src={process.env.PUBLIC_URL + "/img/icons/clock-regular-white.svg"} />
                             </div>
-                            <div className={activeTab === 2 ? 'active' : ''} onClick={this.handleMenuItemClick}>
-                                <Image alias="team" src={process.env.PUBLIC_URL + "/img/icons/team.svg"} />
+                            <div data-url="/teams" className={activeTab === 2 ? 'active' : ''} onClick={this.handleMenuItemClick}>
+                                <Image alias="teams" src={process.env.PUBLIC_URL + "/img/icons/team.svg"} />
                             </div>
                         </Menu.Item>
                         <hr className="sidebar-line"/>
@@ -129,8 +141,8 @@ class SidebarComponent extends Component{
                             {this.teamOptions.map((obj, idx) => {
                                 var assetName = obj.name.toLowerCase().replace(" ", '-');
                                 return (
-                                    <Menu.Item data-url={obj.url} onClick={this.handleMenuItemClick}>
-                                        <Image alias={obj.name} src={process.env.PUBLIC_URL +`/img/icons/menu/${assetName}.svg`}/>
+                                    <Menu.Item data-url={obj.url} onClick={this.handleMenuItemClick} key={obj.url}>
+                                        <div><img alias={obj.name} src={process.env.PUBLIC_URL + obj.icon}/></div>
                                         <span>{obj.name}</span>
                                     </Menu.Item>
                                 )
@@ -141,7 +153,7 @@ class SidebarComponent extends Component{
                             {this.settingsOptions.map((obj, idx) => {
                                 var assetName = obj.name.toLowerCase().replace(" ", '-');
                                 return (
-                                    <Menu.Item data-url={obj.url} onClick={this.handleMenuItemClick}>
+                                    <Menu.Item data-url={obj.url} onClick={this.handleMenuItemClick} key={obj.url}>
                                         <Image alias={obj.name} src={process.env.PUBLIC_URL +`/img/icons/menu/${assetName}.svg`}/>
                                         <span>{obj.name}</span>
                                     </Menu.Item>
@@ -160,17 +172,3 @@ class SidebarComponent extends Component{
 }
 
 export default SidebarComponent;
-/*
-<Menu.Item data-url="/team/calendar" onClick={() => console.log("CALENDAR CLICKED")}>
-                                <Image alias="Schedule" src={process.env.PUBLIC_URL +"/img/icons/menu/schedule.svg"}/>
-                                <span>Schedule</span>
-                            </Menu.Item>
-                            <Menu.Item data-url="/team/scrims">
-                                <Image alias="Scrims" src={process.env.PUBLIC_URL +"/img/icons/menu/scrims.svg"}/>
-                                <span>Scrims</span>
-                            </Menu.Item>
-                            <Menu.Item data-url="/team/settings">
-                                <Image alias="Settings" src={process.env.PUBLIC_URL +"/img/icons/menu/settings.svg"}/>
-                                <span>Settings</span>
-                            </Menu.Item>
-                            */

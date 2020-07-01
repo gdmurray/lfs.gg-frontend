@@ -20,7 +20,6 @@ const mapStateToProps = state => ({
     permissions: state.permissions,
     loading: state.userInfo.loading,
     activeTeam: state.userInfo.activeTeam,
-    pathname: state.router.location.pathname,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({

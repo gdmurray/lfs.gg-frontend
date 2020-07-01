@@ -1,13 +1,21 @@
 import React, {Component} from 'react';
 
-import {Form, Button, Image} from "semantic-ui-react";
+import {Image} from "semantic-ui-react";
+import {Form as SUIForm} from "semantic-ui-react";
 import {REGION_OPTIONS} from "../../constants";
-
+import {Form, Input, Button, Dropdown} from 'formik-semantic-ui';
+import {setErrors} from "formik";
 import "./teams.css";
 
+
+// TODO: INPUT VALIDATION AND ERROR HANDLING
 export default class CreateTeamComponent extends Component {
     fileInputRef = React.createRef();
 
+    initialValues = {
+        name: '',
+        region: 'NA'
+    }
     constructor(props) {
         super(props);
         this.state = {
@@ -52,40 +60,45 @@ export default class CreateTeamComponent extends Component {
         });
     }
 
-    onFormSubmit = e => {
-        e.preventDefault();
-        let data = {
-            name: this.state.name,
-            region: this.state.region
-        }
-        this.props.createTeam(data);
+    _handleSubmit = (values, formikApi) => {
+        console.log(values);
+        this.props.createTeam(values);
     }
 
+    validate = (values) => {
+        const errors = {};
+        if(values.name == ''){
+            errors.name = "Name Cannot be Blank"
+        }
+        return errors;
+    }
     render() {
-        return (
-            <Form onSubmit={this.onFormSubmit}>
-                <Form.Group widths="two">
-                    <Form.Input
-                        name='name'
-                        type='text'
-                        label='Team Name'
-                        placeholder='Team Name'
-                        onChange={this.handleChange}
-                    />
-                </Form.Group>
-                <Form.Group widths="two">
-                    <Form.Select
-                        fluid
-                        name='region'
-                        label='Region'
-                        defaultValue='NA'
-                        onChange={this.handleChange}
-                        options={REGION_OPTIONS}
-                        placeholder='Region'
-                    />
-                </Form.Group>
-                <Form.Button>Submit</Form.Button>
-            </Form>
-        )
+        if(this.props.loading){
+            return (
+                <div>loading</div>
+            )
+        }else {
+            return (
+                <Form onSubmit={this._handleSubmit} initialValues={this.initialValues} validate={this.validate}>
+                    <SUIForm.Group widths="two">
+                        <Input
+                            name='name'
+                            type='text'
+                            label='Team Name'
+                            placeholder='Team Name'
+                        />
+                    </SUIForm.Group>
+                    <SUIForm.Group widths="two">
+                        <Dropdown
+                            name='region'
+                            label='Region'
+                            options={REGION_OPTIONS}
+                            placeholder='Region'
+                        />
+                    </SUIForm.Group>
+                    <Button.Submit>Submit</Button.Submit>
+                </Form>
+            )
+        }
     }
 }

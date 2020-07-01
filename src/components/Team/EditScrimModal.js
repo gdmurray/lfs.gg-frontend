@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import {
     Modal, Form, Button
 } from 'semantic-ui-react';
@@ -11,12 +11,16 @@ export default class EditScrimModal extends Component {
         }
     }
 
-    componentWillReceiveProps(props) {
-        this.setState({ modalOpen: props.modalOpen })
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.modalOpen !== prevState.modalOpen) {
+            this.setState({modalOpen: this.props.modalOpen})
+        }
     }
+
     handleClose = () => {
         this.props.onClose();
-        this.setState({ modalOpen: false })
+        this.setState({modalOpen: false})
     }
 
     render() {
@@ -29,7 +33,7 @@ export default class EditScrimModal extends Component {
 
                 </Modal.Content>
                 <Modal.Actions>
-                    <Button >Save</Button>
+                    <Button>Save</Button>
                     <Button onClick={this.handleClose}>Cancel</Button>
                 </Modal.Actions>
             </Modal>

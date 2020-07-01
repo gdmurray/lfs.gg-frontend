@@ -1,8 +1,15 @@
-import { put, call, select } from 'redux-saga/effects';
-import { USER_INFO_SELF } from "../constants";
-import { withAuth } from '../reducers'
-import {setActiveTeam, SET_ACTIVE_TEAM_SUCCESS, SET_ACTIVE_TEAM_FAILURE, setActiveTeamInDb} from "../actions/userInfo";
-
+import {put, call, select} from 'redux-saga/effects';
+import {push} from "connected-react-router";
+import {USER_INFO_SELF, TEAM_USER_PERMISSIONS_URL} from "../constants";
+import {withAuth, accessToken} from '../reducers'
+import {
+    setActiveTeam,
+    SET_ACTIVE_TEAM_SUCCESS,
+    SET_ACTIVE_TEAM_FAILURE,
+    setActiveTeamInDb,
+    SET_
+} from "../actions/userInfo";
+import {ROUTES} from "../routes";
 import {USER_INFO_SUCCESS, USER_INFO_FAILURE, SET_ACTIVE_TEAM_START} from '../actions/userInfo';
 
 import {
@@ -22,34 +29,42 @@ function formAuthHeader(headers, token) {
     return {...headers, Authorization: 'Bearer ' + token}
 }
 
-export function* userInfoSaga(payload=null,){
-    try{
+export function* userInfoSaga(payload = null,) {
+    try {
+        var authToken;
         var response;
-        if(payload !== null){
+        if (payload !== null) {
             response = yield call(() => fetch(USER_INFO_SELF, {
-                method: 'GET', 
-                headers: formHeader({'Content-Type': 'application/json'}, payload), 
-                }) 
+                    method: 'GET',
+                    headers: formAuthHeader({'Content-Type': 'application/json'}, payload.payload.access),
+                })
             );
-        }else{
+        } else {
+            const authToken = yield select(accessToken);
+
             response = yield call(() => fetch(USER_INFO_SELF, {
-                method: 'GET', 
-                headers: withAuth({'Content-Type': 'application/json'}), 
-                }) 
+                    method: 'GET',
+                    headers: formAuthHeader({'Content-Type': 'application/json'}, authToken),
+                })
             );
         }
-        console.log(response);
         const body = yield call([response, response.json])
         const {active_team} = body;
-        const { teams } = body;
+        const {teams} = body;
 
-        yield put({ type: USER_INFO_SUCCESS, payload: body });
-        
+        yield put({type: USER_INFO_SUCCESS, payload: body});
+
         // No Active Team Has been Set... Set In Database
-        if(active_team == null){
+        if (active_team == null) {
             const activeTeam = yield call(setActiveTeam, teams);
-            if(activeTeam !== undefined){
-                try{
+            console.log("ACTIVE TEAM == NULL");
+            if (activeTeam !== undefined) {
+                console.log("ACTIVE TEAM NOT UNDEFINED");
+                yield put({
+                    type: FETCH_USER_TEAM_PERMISSIONS_REQUEST,
+                    payload: {team: activeTeam.payload.id, auth: payload !== null ? payload : authToken}
+                });
+                try {
                     const actResponse = yield call(() => fetch(USER_INFO_SELF, {
                         method: 'PUT',
                         headers: formHeader({'Content-Type': 'application/json'}, payload),
@@ -57,14 +72,18 @@ export function* userInfoSaga(payload=null,){
                     }))
                     const actBody = yield call([actResponse, actResponse.json()])
                     console.log(actBody);
-                    yield put({type: SET_ACTIVE_TEAM_SUCCESS, payload: actBody.active_team })
-                } catch (teamError){
+                    yield put({type: SET_ACTIVE_TEAM_SUCCESS, payload: actBody.active_team})
+                } catch (teamError) {
                     console.log(teamError);
                     yield put({type: SET_ACTIVE_TEAM_FAILURE, payload: teamError})
                 }
             }
-        }else if(payload !== null){
+        } else if (payload !== null) {
             yield put({type: SET_ACTIVE_TEAM_SUCCESS, payload: active_team})
+            yield put({
+                type: FETCH_USER_TEAM_PERMISSIONS_REQUEST,
+                payload: {team: active_team, auth: payload !== null ? payload : authToken}
+            });
 
         }
     } catch (error) {
@@ -74,6 +93,7 @@ export function* userInfoSaga(payload=null,){
 }
 
 export function* teamPermissionSaga(payload) {
+    console.log("TEAM PERMISSION SAGA");
     try {
         console.log(payload);
         const response = yield call(() => fetch(TEAM_USER_PERMISSIONS_URL.replace("<IDENTIFIER>", payload.payload.team),
@@ -89,7 +109,7 @@ export function* teamPermissionSaga(payload) {
     }
 }
 
-export function* userCreateTeamSaga(teamId = null) {
+export function* userCreateTeamSaga(payload = null) {
     try {
         const authToken = yield select(accessToken);
         const response = yield call(() => fetch(USER_INFO_SELF, {
@@ -100,7 +120,8 @@ export function* userCreateTeamSaga(teamId = null) {
         const body = yield call([response, response.json])
         const {teams} = body;
         yield put({type: USER_INFO_SUCCESS, payload: body});
-        yield put({type: SET_ACTIVE_TEAM_FINISH, payload: teamId})
+        yield put({type: SET_ACTIVE_TEAM_SUCCESS, payload: payload.payload.id})
+        yield put(push("/team/settings")) // todo: TEAM_SETTINGS ROUTE
     } catch (error) {
         console.log(error);
         yield put({type: USER_INFO_FAILURE, error})

@@ -1,9 +1,13 @@
-import {put, call} from 'redux-saga/effects';
+import {put, call, select} from 'redux-saga/effects';
 import {AUTH_OBTAIN_TOKEN, TEAM_USER_PERMISSIONS_URL} from "../constants";
-import { push } from 'connected-react-router';
+import {push} from 'connected-react-router';
 import {LOGIN_SUCCESS, LOGIN_FAILURE, REGISTER_SUCCESS, USER_LOGOUT_FINISH} from '../actions/auth';
 import {USER_INFO_REQUEST} from '../actions/userInfo';
 import {withAuth} from "../reducers";
+import {persistor} from "../index";
+
+const purgePersistor = persistor => persistor.purge();
+
 export function* registerSaga(payload) {
     try {
         //const response = yield call(registerUserService, payload);
@@ -16,10 +20,12 @@ export function* registerSaga(payload) {
 }
 
 export function* logoutSaga() {
-    yield put({type: 'PURGE'})
-    yield put({ type: 'PURGE', key: 'root'});
-    yield put({ type: 'PURGE', key: 'userInfo'});
-    yield put({ type: USER_LOGOUT_FINISH });
+    yield call(purgePersistor, persistor);
+    //yield put({type: 'PURGE'})
+    //yield put({type: 'PURGE', key: 'root'});
+    //yield put({type: 'PURGE', key: 'userInfo'});
+    //yield put({type: 'PURGE', key: 'permissions'});
+    yield put({type: USER_LOGOUT_FINISH});
     yield put(push('/login'));
 }
 

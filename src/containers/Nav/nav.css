@@ -210,6 +210,11 @@ margin-top: 0px !important;
     padding-left: 1.5rem !important;
 }
 
+.team-dropdown-error{
+    display: flex;
+    justify-content: center;
+    color: var(--theme-secondary-color);
+}
 .team-dropdown-wrapper .dropdown-header,
 .sidebar-menu > div.header{
     font-family: var(--theme-font-roboto) !important;
@@ -235,6 +240,7 @@ margin-top: 0px !important;
     padding-top: 0.4rem !important;
     padding-bottom: 0.4rem !important;
     cursor: pointer;
+    padding-left: 2rem !important;
 }
 
 .sidebar-menu > a.item:not(.header) > span,
@@ -246,3 +252,5 @@ margin-top: 0px !important;
 .sidebar-menu > div.item > img{
     margin-right: 8px;
 }
+
+
