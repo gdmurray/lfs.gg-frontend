@@ -16,7 +16,7 @@ export default class NoTeamsFound extends Component {
                         marginTop: '1.5em',
                     }}
                 />
-                <Button primary size='huge'>
+                <Button primary size='huge' onClick={() => this.props.goToRoute("/create/team")}>
                     Create Team&nbsp;&nbsp;&nbsp;
                     <Icon name='plus'/>
                 </Button>

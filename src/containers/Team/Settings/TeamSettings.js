@@ -11,14 +11,15 @@ import {
 
 import "./settings.css";
 import {TEAM_ROLES} from "../../../constants";
+import {deleteTeamRole} from "../../../actions/teamRoles";
 import {fetchTeamSettings, uploadTeamLogo, updateTeamSettings} from "../../../actions/teamData";
 import TeamSettingsForm from "../../../components/Team/Settings/TeamSettingsForm";
 import TeamRolesForm from "../../../components/Team/Settings/TeamRolesForm";
 
 class TeamSettings extends Component {
     componentDidMount() {
-        if (this.props.permissions.team_id === this.props.activeTeam) {
-            if (this.props.permissions.role === TEAM_ROLES.PLAYER) {
+        if (this.props.permissions.data.team_id === this.props.activeTeam) {
+            if (this.props.permissions.data.role === TEAM_ROLES.PLAYER) {
                 this.props.goToRoute("/team");
             }
         }
@@ -78,7 +79,8 @@ const mapDispatchToProps = dispatch => bindActionCreators({
     goToRoute: (url) => push(url),
     fetchTeamSettings: (team, path) => fetchTeamSettings(team, path),
     uploadTeamLogo: (team, logo) => uploadTeamLogo(team, logo),
-    updateTeamSettings: (team, data, path) => updateTeamSettings(team, data, path)
+    updateTeamSettings: (team, data, path) => updateTeamSettings(team, data, path),
+    deleteTeamRole: (team, role) => deleteTeamRole(team, role)
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(TeamSettings);

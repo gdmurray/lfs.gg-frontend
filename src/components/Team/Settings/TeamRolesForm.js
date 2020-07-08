@@ -4,27 +4,46 @@ import {capitalize} from "../../../utils";
 import InviteUserModal from "../../../containers/Team/Settings/InviteUserModal";
 import {
     Header,
-    Table,
+    Table, Confirm,
     Button, Icon, Dropdown
 } from "semantic-ui-react";
+
+import sortBy from "lodash/sortBy";
 
 // todo: sort by OWNER, ADMIN, USER, PLAYER
 export default class TeamRolesForm extends Component {
 
     state = {
-        editMode: false
+        editMode: false,
+        open: false,
+        activeRole: null
+    }
+
+    openConfirm = () => this.setState({open: true})
+    closeConfirm = () => this.setState({open: false})
+    confirmDelete = () => {
+        const {activeRole} = this.state;
+        this.props.deleteTeamRole(this.props.activeTeam, activeRole);
+        this.setState({activeRole: null})
+        this.closeConfirm()
     }
 
     isUser = (user, role) => {
         return (user === role.user.id)
     }
 
-    isYou = (role) => {
+    nameSubtitle = (role) => {
         if (this.props.activeUser == role.user.id) {
             return (
                 <span>
                     (You)
                 </span>
+            )
+        }
+
+        if (role.invite !== null) {
+            return (
+                <span>({role.invite.status})</span>
             )
         }
     }
@@ -42,25 +61,38 @@ export default class TeamRolesForm extends Component {
         }
     }
 
+    deleteRole = (roleId) => {
+        this.setState({
+            activeRole: roleId
+        })
+        this.openConfirm()
+    }
     renderEditMode = (role) => {
         if (this.state.editMode && !(this.isUser(this.props.activeUser, role))) {
             return (
                 <Table.Cell>
-                    <Icon name={"user delete"} color={"red"}/>
+                    <Button onClick={this.deleteRole.bind(this, role.id)} icon='user delete' color={"red"}
+                            size={"mini"}/>
                 </Table.Cell>
             )
         }
+    }
+
+    invitedSubtitle = (role) => {
+
     }
     renderUsers = () => {
         let rows = [];
         if (this.props.settings.data.length > 0) {
             const {data} = this.props.settings;
-            data.sort((a, b) => (ROLE_HEIRARCHY[a.role] > ROLE_HEIRARCHY[b.role] ? 1 : -1))
-            for (var role of data) {
+            let sortedData = sortBy(data, [function (o) {
+                return ROLE_HEIRARCHY[o.role]
+            }, 'id']);
+            for (var role of sortedData) {
                 rows.push(
                     <Table.Row key={role.id} className={"user-row"}>
                         <Table.Cell>
-                            {role.user.username} {this.isYou(role)}
+                            {role.user.username} {this.nameSubtitle(role)}
                         </Table.Cell>
                         <Table.Cell>
                             {role.user.email}
@@ -79,6 +111,11 @@ export default class TeamRolesForm extends Component {
     render() {
         return (
             <div>
+                <Confirm open={this.state.open}
+                         centered
+                         size={"small"}
+                         onCancel={this.closeConfirm}
+                         onConfirm={this.confirmDelete}/>
                 <div className={"role-bar"}>
                     <Header as={"h4"}>Roles</Header>
                     <div>

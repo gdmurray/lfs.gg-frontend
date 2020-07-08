@@ -16,7 +16,7 @@ export default class TeamSettingsComponent extends Component {
                     <Header as={"h2"}>
                         {TEAM_SETTINGS_TITLES[this.props.settingsTab]}
                     </Header>
-                    <Loader active inline style={{marginLeft: '100px'}}>Loading</Loader>
+                    <Loader active inline>Loading</Loader>
                 </Container>
             )
         } else {

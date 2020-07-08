@@ -1,0 +1,16 @@
+.invitation-container .card-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+.invitation-container .ui.card {
+    width: 50%;
+    max-width: 500px;
+}
+
+.invitation-container .ui.card .description{
+    font-size: 24px !important;
+    line-height: 32px !important;
+    padding: 2rem !important;
+}

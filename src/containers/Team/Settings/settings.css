@@ -139,3 +139,7 @@
     height: 38px !important;
 }
 
+.invite-modal .ui.action.input {
+    width: 100%;
+}
+

@@ -21,10 +21,6 @@ export function* registerSaga(payload) {
 
 export function* logoutSaga() {
     yield call(purgePersistor, persistor);
-    //yield put({type: 'PURGE'})
-    //yield put({type: 'PURGE', key: 'root'});
-    //yield put({type: 'PURGE', key: 'userInfo'});
-    //yield put({type: 'PURGE', key: 'permissions'});
     yield put({type: USER_LOGOUT_FINISH});
     yield put(push('/login'));
 }

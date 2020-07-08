@@ -11,6 +11,8 @@ import PrivateRoute from "./containers/PrivateRoute";
 import TeamHome from "./containers/Team/TeamHome";
 import TeamPage from "./containers/Team/TeamPage";
 import ScrimPage from "./containers/Scrims/ScrimPage";
+import Invitation from "./containers/Invitation";
+import Notifications from "./containers/Notifications/Notifications";
 
 class App extends Component {
     render() {
@@ -21,8 +23,10 @@ class App extends Component {
                     <Route exact path={ROUTES.LOGIN} component={Login}/>
                     <Route exact path={ROUTES.REGISTER} component={Register}/>
                     <Route exact path={ROUTES.CREATE_TEAM} component={TeamCreate}/>
-                    <Route exact path={ROUTES.TEAMS} component={Teams}/>
+                    <Route exact path={ROUTES.INVITE} component={Invitation}/>
+                    <PrivateRoute exact path={ROUTES.TEAMS} component={Teams}/>
                     <PrivateRoute path={ROUTES.TEAM_HOME} component={TeamHome}/>
+                    <PrivateRoute path={ROUTES.NOTIFICATIONS} component={Notifications} />
                     <Route path="/t/:id" component={TeamPage}/>
                     <Route path="/scrim/:id" component={ScrimPage}/>
                 </Switch>

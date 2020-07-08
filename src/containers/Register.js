@@ -26,7 +26,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    register: (values, query = null) => {
+    register: (values, query = '') => {
         dispatch(registerUser(values, query))
     }
 })

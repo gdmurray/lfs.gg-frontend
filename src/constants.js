@@ -1,4 +1,4 @@
-export const BACKEND_API = process.env.REACT_APP_BACKEND_URL ? process.env.REACT_APP_BACKEND_URL : 'http://0.0.0.0:8080';
+export const BACKEND_API = process.env.REACT_APP_BACKEND_URL ? process.env.REACT_APP_BACKEND_URL : 'https://api.r6pl.com';
 export const TEAM_KEY = "<IDENTIFIER>"
 export const REGISTER_USER_URL = BACKEND_API + "/api/user/register/";
 
@@ -18,6 +18,7 @@ export const TEAM_USER_PERMISSIONS_URL = BACKEND_API + '/api/user/permissions/<I
 export const TEAM_SETTINGS_BASE_URL = BACKEND_API + '/api/team/<IDENTIFIER>/'
 export const TEAM_SET_LOGO_URL = BACKEND_API + '/api/team/<IDENTIFIER>/settings/logo';
 export const TEAM_VIEW_INFO_URL = BACKEND_API + '/api/team/<IDENTIFIER>/view';
+export const TEAM_ROLE_URL = BACKEND_API + '/api/team/<IDENTIFIER>/role/';
 export const TEAM_VIEW_SCRIMS_URL = BACKEND_API + '/api/team/<IDENTIFIER>/view/scrims';
 export const TEAM_INVITE_URL = BACKEND_API + '/api/team/<IDENTIFIER>/invite';
 
@@ -45,6 +46,11 @@ export const ROLE_HEIRARCHY = {
     ADMIN: 2,
     USER: 3,
     PLAYER: 4
+}
+
+export const INVITE_METHODS = {
+    USERNAME: "USERNAME",
+    LINK: "LINK"
 }
 
 export const ROLE_OPTIONS = [

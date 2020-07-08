@@ -252,6 +252,7 @@ export default class TeamCalendarComponent extends Component {
     }
     render() {
         const { activeScrimTab, modalOpen } = this.state;
+        console.log(this.state.newScrims);
         return (
             <Container style={{ padding: '1rem' }} onClick={this.outerClick}>
                 <EditScrimModal modalOpen={modalOpen} onClose={this.modalClosed} />

@@ -68,7 +68,9 @@
 }
 .app-navbar{
     left: 250px !important;
-    height: 50px !important;
+    height: 80px !important;
+    /* border-bottom: unset !important;
+    box-shadow: unset !important; */
 }
 
 .App-header {
@@ -113,9 +115,23 @@ body{
     margin-right: 250px !important;
 }
 
-.nav-icon > i,
+/*
+.right-menu .item::before {
+    background: unset !important;
+}
+*/
+
+.app-navbar .notifications-icon {
+    font-size: 2rem !important;
+}
+
+.app-navbar .right-menu .notif-label {
+    top: 9px !important;
+    left: 48px !important;
+    font-size: 9px !important;
+}
 .nav-user-dropdown-icon > i{
-    font-size: 1.5rem !important;
+    font-size: 2rem !important;
     margin-right: 0px !important;
 }
 .nav-user-dropdown{

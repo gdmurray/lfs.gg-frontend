@@ -31,3 +31,29 @@
 .hidden-input {
     display: none;
 }
+
+.teams-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5rem 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    border-top: 6px solid var(--theme-primary-complement);
+    border-radius: 2px 2px 0 0;
+    margin-bottom: 2rem;
+    /*border-top-left-radius: 2px;
+    border: 1px solid var(--theme-secondary-color);
+    border-bottom: 10px solid var(--theme-primary-complement);
+    border-top-right-radius: 2px;
+    */
+}
+
+.teams-header .ui.header {
+    margin-bottom: 0 !important;
+}
+
+.team-list-card:hover{
+    box-shadow: 0 0 0 1px #d4d4d5, 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.15) !important;
+    transition: box-shadow .5s ease-in-out;
+    cursor: pointer;
+}

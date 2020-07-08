@@ -4,6 +4,8 @@ import {push} from "connected-react-router";
 import {bindActionCreators} from 'redux'
 import AppWrapper from "../Nav/AppWrapper";
 import TeamsComponent from "../../components/Team/TeamsComponent";
+import {changeActiveTeam} from "../../actions/userInfo";
+import "./team.css";
 
 const Teams = (props) => {
     return (
@@ -13,10 +15,14 @@ const Teams = (props) => {
     )
 }
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state) => ({
+    teams: state.userInfo.data.teams,
+    activeTeam: state.userInfo.activeTeam
+})
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-    goTo: (url) => push(url)
+    goTo: (url) => push(url),
+    changeActiveTeam: (team) => changeActiveTeam(team)
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Teams);

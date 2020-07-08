@@ -10,10 +10,13 @@ import TeamHomeComponent from '../../components/Team/TeamHomeComponent';
 import TeamScrims from "./TeamScrims";
 import TeamCalendar from "./TeamCalendar";
 import {connect} from 'react-redux';
+import {fetchUserTeamPermissions} from "../../actions/permissions";
 import {bindActionCreators} from 'redux'
 import {push} from 'connected-react-router'
+import {refreshPermissions} from "../../utils";
 import {fetchTeamHomeData} from "../../actions/teamData";
 import {TEAM_ROLES} from "../../constants";
+import TeamSchedule from "./TeamSchedule";
 // TODO: Better Error Handling
 // TODO: Vary view based on authentication... gonna need some fun classes
 
@@ -48,6 +51,12 @@ class TeamHome extends Component {
         if (this.props.activeTeam !== undefined) {
             // TODO: Add Last fetched flag, so we can keep the persisted data
             this.props.fetchTeamHomeData(this.props.activeTeam);
+
+            // Refresh Permissions if it didnt happen before
+            if (refreshPermissions(this.props)) {
+                console.log("refresh Permissions");
+                this.props.refreshPermissions(this.props.activeTeam);
+            }
         }
     }
 
@@ -65,13 +74,14 @@ class TeamHome extends Component {
     urlMap = {
         '/team': 'home',
         '/team/calendar': 'calendar',
+        '/team/schedule': 'schedule',
         '/team/scrims': 'scrims',
         '/team/settings': 'settings'
     }
 
     renderSettingsTab = (activeTab) => {
-        if(this.props.permissions.team_id === this.props.activeTeam){
-            if(this.props.permissions.role !== TEAM_ROLES.PLAYER){
+        if (this.props.permissions.data.team_id === this.props.activeTeam) {
+            if (this.props.permissions.data.role !== TEAM_ROLES.PLAYER) {
                 return (
                     <Menu.Menu position='right'>
                         <Menu.Item
@@ -105,6 +115,12 @@ class TeamHome extends Component {
                                     onClick={this.handleTabClick}
                                 />
                                 <Menu.Item
+                                    name="schedule"
+                                    data-url={"/team/schedule"}
+                                    active={activeTab === 'schedule'}
+                                    onClick={this.handleTabClick}
+                                />
+                                <Menu.Item
                                     name='calendar'
                                     data-url="/team/calendar"
                                     active={activeTab === 'calendar'}
@@ -119,10 +135,16 @@ class TeamHome extends Component {
                                 {this.renderSettingsTab(activeTab)}
                             </Menu>
                             <div className="team-inner-content">
-                                <PrivateRoute exact path={`${this.props.match.path}/`} component={TeamHomeComponent}/>
-                                <PrivateRoute exact path={`${this.props.match.path}/calendar`} component={TeamCalendar}/>
-                                <PrivateRoute exact path={`${this.props.match.path}/scrims`} component={TeamScrims}/>
-                                <PrivateRoute path={`${this.props.match.path}/settings`} component={TeamSettings}/>
+                                <PrivateRoute exact path={`${this.props.match.path}/`}
+                                              component={TeamHomeComponent}/>
+                                <PrivateRoute exact path={`${this.props.match.path}/calendar`}
+                                              component={TeamCalendar}/>
+                                <PrivateRoute exact path={`${this.props.match.path}/schedule`}
+                                              component={TeamSchedule}/>
+                                <PrivateRoute exact path={`${this.props.match.path}/scrims`}
+                                              component={TeamScrims}/>
+                                <PrivateRoute path={`${this.props.match.path}/settings`}
+                                              component={TeamSettings}/>
                             </div>
                         </div>
                     </div>
@@ -135,7 +157,7 @@ class TeamHome extends Component {
                     <div className="core-content">
                         <Navbar/>
                         <div className="page-content">
-                            <NoTeamsFound/>
+                            <NoTeamsFound {...this.props}/>
                         </div>
                     </div>
                 </div>
@@ -151,7 +173,8 @@ const mapStateToProps = state => ({
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
     goToRoute: (url) => push(url),
-    fetchTeamHomeData: (id) => fetchTeamHomeData(id)
+    fetchTeamHomeData: (id) => fetchTeamHomeData(id),
+    refreshPermissions: (team) => fetchUserTeamPermissions(team)
 }, dispatch);
 
 

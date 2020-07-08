@@ -29,7 +29,7 @@ export const logInUserAction = (user) => {
     }
 }
 
-export const registerUser = (values, query = null) => ({
+export const registerUser = (values, query = '') => ({
     [RSAA]: {
         endpoint: REGISTER_USER_URL + query,
         method: 'POST',

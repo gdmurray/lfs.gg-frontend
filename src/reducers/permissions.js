@@ -1,10 +1,12 @@
 import * as permissions from "../actions/permissions";
 
 const initialState = {
-    team: {},
-    league: {},
-    loading: false,
-    error: {}
+    team: {
+        error: false,
+        data: {},
+        loading: false
+    },
+    league: {}
 }
 
 export default (state = initialState, action) => {
@@ -12,19 +14,29 @@ export default (state = initialState, action) => {
         case permissions.FETCH_USER_TEAM_PERMISSIONS_REQUEST:
             return {
                 ...state,
-                loading: true
+                team: {
+                    data: {},
+                    loading: true,
+                    error: false
+                }
             }
         case permissions.FETCH_USER_TEAM_PERMISSIONS_SUCCESS:
             return {
                 ...state,
-                loading: false,
-                team: action.payload
+                team: {
+                    data: action.payload,
+                    loading: false,
+                    error: false
+                },
             }
         case permissions.FETCH_USER_TEAM_PERMISSIONS_FAILURE:
             return {
                 ...state,
-                loading: false,
-                error: action.payload
+                team: {
+                    error: action.payload,
+                    data: {},
+                    loading: false
+                }
             }
         default:
             return state;

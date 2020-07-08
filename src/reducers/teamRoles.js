@@ -2,30 +2,28 @@ import * as teamRoles from "../actions/teamRoles";
 
 const initialState = {
     loading: false,
-    inviteLink: null,
-    error: {}
+    error: false
 }
+
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case teamRoles.INVITE_TEAM_USER_REQUEST:
+        case teamRoles.DELETE_TEAM_ROLE_REQUEST:
             return {
                 ...state,
-                error: {},
                 loading: true
             }
-        case teamRoles.INVITE_TEAM_USER_SUCCESS:
+        case teamRoles.DELETE_TEAM_ROLE_SUCCESS:
             return {
                 ...state,
-                error: {},
-                inviteLink: action.payload,
-                loading: false
+                loading: false,
+                error: false
             }
-        case teamRoles.INVITE_TEAM_USER_FAILURE:
+        case teamRoles.DELETE_TEAM_ROLE_FAILURE:
             return {
                 ...state,
-                error: action.payload,
-                loading: false
+                loading: false,
+                error: action.payload
             }
         default:
             return state;

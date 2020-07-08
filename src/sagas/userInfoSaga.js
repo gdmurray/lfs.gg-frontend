@@ -29,11 +29,13 @@ function formAuthHeader(headers, token) {
     return {...headers, Authorization: 'Bearer ' + token}
 }
 
+// TODO: AUTH HEADER SENDING OBJECT BRO FUCK THISSSS
 export function* userInfoSaga(payload = null,) {
     try {
         var authToken;
         var response;
-        if (payload !== null) {
+        console.log(payload);
+        if (payload.payload !== undefined) {
             response = yield call(() => fetch(USER_INFO_SELF, {
                     method: 'GET',
                     headers: formAuthHeader({'Content-Type': 'application/json'}, payload.payload.access),
@@ -41,7 +43,6 @@ export function* userInfoSaga(payload = null,) {
             );
         } else {
             const authToken = yield select(accessToken);
-
             response = yield call(() => fetch(USER_INFO_SELF, {
                     method: 'GET',
                     headers: formAuthHeader({'Content-Type': 'application/json'}, authToken),
@@ -59,7 +60,7 @@ export function* userInfoSaga(payload = null,) {
             const activeTeam = yield call(setActiveTeam, teams);
             console.log("ACTIVE TEAM == NULL");
             if (activeTeam !== undefined) {
-                console.log("ACTIVE TEAM NOT UNDEFINED");
+                console.log("dispatching perm");
                 yield put({
                     type: FETCH_USER_TEAM_PERMISSIONS_REQUEST,
                     payload: {team: activeTeam.payload.id, auth: payload !== null ? payload : authToken}
@@ -67,7 +68,7 @@ export function* userInfoSaga(payload = null,) {
                 try {
                     const actResponse = yield call(() => fetch(USER_INFO_SELF, {
                         method: 'PUT',
-                        headers: formHeader({'Content-Type': 'application/json'}, payload),
+                        headers: formAuthHeader({'Content-Type': 'application/json'}, authToken ? authToken : payload.payload.access),
                         body: JSON.stringify({active_team: activeTeam.payload.id})
                     }))
                     const actBody = yield call([actResponse, actResponse.json()])
@@ -80,9 +81,13 @@ export function* userInfoSaga(payload = null,) {
             }
         } else if (payload !== null) {
             yield put({type: SET_ACTIVE_TEAM_SUCCESS, payload: active_team})
+            console.log("dispatching perm", payload);
             yield put({
                 type: FETCH_USER_TEAM_PERMISSIONS_REQUEST,
-                payload: {team: active_team, auth: payload !== null ? payload : authToken}
+                payload: {
+                    team: active_team,
+                    auth: (payload !== null || payload.payload !== undefined) ? payload.payload.access : authToken
+                }
             });
 
         }
@@ -93,19 +98,21 @@ export function* userInfoSaga(payload = null,) {
 }
 
 export function* teamPermissionSaga(payload) {
-    console.log("TEAM PERMISSION SAGA");
-    try {
-        console.log(payload);
-        const response = yield call(() => fetch(TEAM_USER_PERMISSIONS_URL.replace("<IDENTIFIER>", payload.payload.team),
-            {
-                method: 'GET',
-                headers: formHeader({'Content-Type': 'application/json'}, payload.payload.auth)
-            }
-        ))
-        const body = yield call([response, response.json])
-        yield put({type: FETCH_USER_TEAM_PERMISSIONS_SUCCESS, payload: body})
-    } catch (error) {
-        yield put({type: FETCH_USER_TEAM_PERMISSIONS_FAILURE, error})
+    console.log(payload);
+    if (payload.payload !== undefined) {
+        try {
+            const response = yield call(() => fetch(TEAM_USER_PERMISSIONS_URL.replace("<IDENTIFIER>", payload.payload.team),
+                {
+                    method: 'GET',
+                    headers: formAuthHeader({'Content-Type': 'application/json'}, payload.payload.auth)
+                }
+            ))
+            const body = yield call([response, response.json])
+            yield put({type: FETCH_USER_TEAM_PERMISSIONS_SUCCESS, payload: body})
+        } catch (error) {
+            console.log("PERMISSIONS FAILED: ", error);
+            yield put({type: FETCH_USER_TEAM_PERMISSIONS_FAILURE, error})
+        }
     }
 }
 
@@ -121,9 +128,22 @@ export function* userCreateTeamSaga(payload = null) {
         const {teams} = body;
         yield put({type: USER_INFO_SUCCESS, payload: body});
         yield put({type: SET_ACTIVE_TEAM_SUCCESS, payload: payload.payload.id})
+        yield put({
+            type: FETCH_USER_TEAM_PERMISSIONS_REQUEST,
+            payload: {team: payload.payload.id, auth: authToken}
+        });
         yield put(push("/team/settings")) // todo: TEAM_SETTINGS ROUTE
     } catch (error) {
         console.log(error);
         yield put({type: USER_INFO_FAILURE, error})
+    }
+}
+
+export function* userAcceptInviteSaga(payload = null) {
+    try {
+        yield put({type: USER_INFO_REQUEST})
+        yield put(push("/"))
+    } catch (error) {
+        console.log(error);
     }
 }

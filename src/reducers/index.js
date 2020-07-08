@@ -8,6 +8,7 @@ import teams, * as fromTeams from "./teams";
 import teamView, * as teamViewInfo from './teamView';
 import teamScrims from "./teamScrims";
 import teamRoles from "./teamRoles";
+import invitations from "./invitations";
 import permissions from "./permissions";
 
 import storage from 'redux-persist/lib/storage';
@@ -32,6 +33,7 @@ export default (history) => combineReducers({
     auth: auth,
     echo: echo,
     calendar: calendar,
+    invitations: invitations,
     teamScrims: teamScrims,
     teams: teams,
     teamRoles: teamRoles,
