@@ -5,6 +5,7 @@ import { push } from 'connected-react-router'
 import TeamScrimsComponent from "./TeamScrimsComponent";
 
 import {fetchTeamScrims} from "../TeamView/ducks/actions";
+import {activeTeam} from "../../reducers";
 
 class TeamScrims extends Component{
     
@@ -13,9 +14,9 @@ class TeamScrims extends Component{
     }
 }
 const mapStateToProps = state => ({
-    activeTeam: state.userInfo.activeTeam,
-    scrims: state.teamScrims.scrims,
-    loading: state.teamScrims.loading
+    activeTeam: activeTeam(state),
+    //scrims: state.teamScrims.scrims,
+    //loading: state.teamScrims.loading
 })
 const mapDispatchToProps = dispatch => ({
     getScrims: (team, query='') => {

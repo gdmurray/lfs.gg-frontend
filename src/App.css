@@ -1,8 +1,7 @@
 :root{
-
   --theme-landing-form-color: #ECECEC;
   --theme-landing-secondary-color:#6B7282;
-
+  --theme-background-color: #F7FAFE;
   --theme-primary-color: #031B4D;
   --theme-primary-complement: #FF0057;
   --theme-body-color: #4D4F5C;
@@ -26,13 +25,17 @@
 .app-content{
   height: 100% !important;
 }
+
+body{
+  background: var(--theme-background-color);
+}
 .core-content{
   margin-left: 250px !important;
   min-height: 100%;
 }
 
 .page-content{
-  top: 77px;
+  top: 35px;
   position: relative;
   height: 100%;
   padding: 1rem 2rem 5rem;
@@ -40,4 +43,14 @@
 
 .ui.dimmer {
   background-color: rgba(0,0,0,.3) !important;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }

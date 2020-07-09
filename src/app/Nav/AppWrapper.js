@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {push} from "connected-react-router";
-import SidebarComponent from "./SidebarComponent";
+import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
 import {bindActionCreators} from "redux";
 import {changeActiveTeam} from "../User/ducks/actions";
@@ -14,7 +14,7 @@ import "./nav.css";
 const AppWrapper = (props) => {
     return (
         <div className="app-content">
-            <SidebarComponent {...props} />
+            <Sidebar {...props} />
             <div className="core-content">
                 <Navbar {...props} />
                 <div className="page-content">
@@ -26,11 +26,11 @@ const AppWrapper = (props) => {
 }
 
 const mapStateToProps = (state) => ({
+    notifications: [{bruh: "moment"},],
     pathname: state.router.location.pathname,
     userInfo: state.user.userInfo,
     permissions: state.user.teamPermissions,
     loading: state.user.userInfo.loading,
-    user: state.user,
     //userTeams: userTeams(state.user.userInfo),
     activeTeam: activeTeam(state),
 })

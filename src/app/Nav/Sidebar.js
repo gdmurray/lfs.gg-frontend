@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 import {TEAM_ROLES} from "../../utils/constants";
 import {
-    Sidebar, Menu, Dropdown, Header, Accordion, Icon, Image
+    Sidebar as SUISidebar,
+    Menu, Dropdown, Header, Accordion, Icon, Image
 } from "semantic-ui-react";
 
 
@@ -9,7 +10,7 @@ function mapTeamsToOptions(teams) {
     return teams.map((item, i) => ({key: item.team.id, text: item.team.name, value: item.team.id}));
 }
 
-class SidebarComponent extends Component {
+class Sidebar extends Component {
     state = {
         activeTab: null
     }
@@ -100,7 +101,7 @@ class SidebarComponent extends Component {
             const {teams} = this.props.userInfo.data;
             if (teams.length > 0) {
                 const {activeTeam} = this.props;
-                if(activeTeam == null){
+                if (activeTeam == null) {
                     return (
                         <div className="team-dropdown-wrapper">
                             <div className="dropdown-header">SELECT TEAM</div>
@@ -108,7 +109,7 @@ class SidebarComponent extends Component {
                                       placeholder={"Select Team"} options={mapTeamsToOptions(teams)} upward={true}/>
                         </div>
                     )
-                }else{
+                } else {
                     return (
                         <div className="team-dropdown-wrapper">
                             <div className="dropdown-header">TEAM SELECTED</div>
@@ -147,7 +148,7 @@ class SidebarComponent extends Component {
     render() {
         const {activeTab} = this.state;
         return (
-            <Sidebar visible={true} className='app-sidebar'>
+            <SUISidebar visible={true} className='app-sidebar'>
                 <div className="top">
                     <Menu secondary vertical>
                         <Menu.Item className="sidebar-logo">
@@ -201,9 +202,9 @@ class SidebarComponent extends Component {
                     <hr className="sidebar-line"/>
                     {this.renderTeams()}
                 </div>
-            </Sidebar>
+            </SUISidebar>
         )
     }
 }
 
-export default SidebarComponent;
+export default Sidebar;

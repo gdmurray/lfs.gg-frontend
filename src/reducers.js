@@ -50,9 +50,11 @@ export const refreshToken = state => authSelectors.refreshToken(state.auth)
 export const isRefreshTokenExpired = state => authSelectors.isRefreshTokenExpired(state.auth)
 export const authErrors = state => authSelectors.errors(state.auth)
 export const registerErrors = state => authSelectors.registerErrors(state.auth)
+
 export const activeTeam = state => userSelectors.activeTeam(state.user);
 export const userTeams = state => userSelectors.userTeams(state.user)
 export const userId = state => userSelectors.userId(state.user)
+export const userData = state => userSelectors.userData(state.user);
 
 export function withAuth(headers = {}) {
     return (state) => ({

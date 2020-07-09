@@ -9,6 +9,13 @@ export function activeTeam(state) {
     return null
 }
 
+export function userData(state) {
+    if (state.userInfo.loading == false) {
+        return state.userInfo.data
+    }
+    return null;
+}
+
 export function userTeams(state) {
     console.log(state);
     if (state.userInfo.loading == false) {
@@ -27,5 +34,6 @@ export function userId(state) {
 export default {
     activeTeam,
     userTeams,
-    userId
+    userId,
+    userData
 };

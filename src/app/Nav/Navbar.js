@@ -2,17 +2,11 @@ import React, {Component} from 'react';
 import {
     Menu, Container, Button, Image, Dropdown, Icon, Label
 } from 'semantic-ui-react';
-
-import {connect} from 'react-redux';
 import {ROUTES} from "../../utils/routes";
-import {logout} from '../Auth/ducks/actions';
-import {push} from "connected-react-router";
 
 /*
 NOTIFICATIONS WHEN NOTIFICATIONS ARE READY
-<Label color='red' className='notif-label' floating circular size={"mini"}>
-                           3&nbsp;
-                        </Label>
+
 
              <div className="app-navbar">
                 <div>
@@ -22,10 +16,6 @@ NOTIFICATIONS WHEN NOTIFICATIONS ARE READY
 
                 </div>
             </div>
- */
-class Navbar extends Component {
-    render() {
-        return (
             <Menu className='app-navbar' fixed='top'>
                 <Menu.Menu position='right' className='right-menu'>
                     <Menu.Item as='a' onClick={() => this.props.goToRoute(ROUTES.NOTIFICATIONS)}>
@@ -44,14 +34,34 @@ class Navbar extends Component {
                 </Menu.Menu>
 
             </Menu>
-        )
+ */
+
+const Navbar = (props) => {
+    const showNotificatonBlip = () => {
+        console.log(props);
+        return null;
     }
+    return (
+        <div className="app-navbar">
+            <div>
+
+            </div>
+            <div className="icon-group">
+                <Icon name={"bell"}/>
+                <Dropdown item icon={'user circle outline'}
+                          className={'nav-user-dropdown-icon'} pointing="top right">
+                    <Dropdown.Menu className='nav-user-dropdown noselect'>
+                        <Dropdown.Header>My Username</Dropdown.Header>
+                        <Dropdown.Item>Profile</Dropdown.Item>
+                        <Dropdown.Item>Settings</Dropdown.Item>
+                        <Dropdown.Divider/>
+                        <Dropdown.Item onClick={() => props.logout()}>Logout</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
+            </div>
+        </div>
+    )
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    logout: () => {
-        dispatch(logout())
-    },
-    goToRoute: (url) => dispatch(push(url)),
-});
-export default connect(null, mapDispatchToProps)(Navbar);
+export default Navbar;
+

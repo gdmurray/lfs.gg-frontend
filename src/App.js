@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Route, Switch} from 'react-router'
 import './App.css';
+import './overrides.css';
 import {ROUTES} from "./utils/routes";
 import HomePageLogic from "./app/Dashboard/HomePageLogic";
 import Login from "./app/Auth/Login";
