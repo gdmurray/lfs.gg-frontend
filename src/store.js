@@ -1,6 +1,6 @@
 import storage from 'redux-persist/es/storage'
 //import { apiMiddleware } from 'redux-api-middleware';
-import apiMiddleware from './middleware';
+import apiMiddleware from './utils/middleware';
 import {applyMiddleware, createStore, compose} from 'redux'
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {createFilter} from 'redux-persist-transform-filter';

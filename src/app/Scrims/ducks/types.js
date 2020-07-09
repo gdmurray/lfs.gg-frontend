@@ -1,0 +1,7 @@
+export const UPDATE_SCRIM_START = "@@scrims/UPDATE_SCRIM_START"
+export const UPDATE_SCRIM_SUCCESS = "@@scrims/UPDATE_SCRIM_SUCCESS"
+export const UPDATE_SCRIM_FAILURE = "@@scrims/UPDATE_SCRIM_FAILURE"
+
+export const FETCH_SCRIM_REQUEST = '@@scrims/FETCH_SCRIM_REQUEST'
+export const FETCH_SCRIM_SUCCESS = '@@scrims/FETCH_SCRIM_SUCCESS'
+export const FETCH_SCRIM_FAILURE = '@@scrims/FETCH_SCRIM_FAILURE'

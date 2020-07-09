@@ -10,9 +10,9 @@ import {Route, Switch} from 'react-router'
 
 import 'semantic-ui-css/semantic.min.css'
 
-import LoadingView from "./components/LoadingView";
+import LoadingView from "./app/common/LoadingView";
 import "./App.css";
-import {ROUTES} from "./routes";
+import {ROUTES} from "./utils/routes";
 import App from "./App";
 
 export const {store, persistor} = configureStore(history)

@@ -1,18 +1,18 @@
 import React, {Component} from 'react';
 import {Route, Switch} from 'react-router'
 import './App.css';
-import {ROUTES} from "./routes";
-import HomePageLogic from "./containers/HomePageLogic";
-import Login from "./containers/Login";
-import Register from "./containers/Register";
-import TeamCreate from "./containers/Team/TeamCreate";
-import Teams from "./containers/Team/Teams";
-import PrivateRoute from "./containers/PrivateRoute";
-import TeamHome from "./containers/Team/TeamHome";
-import TeamPage from "./containers/Team/TeamPage";
-import ScrimPage from "./containers/Scrims/ScrimPage";
-import Invitation from "./containers/Invitation";
-import Notifications from "./containers/Notifications/Notifications";
+import {ROUTES} from "./utils/routes";
+import HomePageLogic from "./app/Dashboard/HomePageLogic";
+import Login from "./app/Auth/Login";
+import Register from "./app/Auth/Register";
+import TeamCreate from "./app/Teams/CreateTeam";
+import Teams from "./app/Teams/UserTeamsList";
+import PrivateRoute from "./app/common/PrivateRoute";
+import TeamHome from "./app/Teams/TeamHome";
+import TeamPage from "./app/Teams/TeamPage";
+import ScrimPage from "./app/Scrims/ScrimPage";
+import Invitation from "./app/Notifications/Invitation";
+import Notifications from "./app/Notifications/Notifications";
 
 class App extends Component {
     render() {

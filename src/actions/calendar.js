@@ -1,5 +1,5 @@
 import { RSAA } from 'redux-api-middleware';
-import {TEAM_SCHEDULE_URL} from '../constants';
+import {TEAM_SCHEDULE_URL} from '../utils/constants';
 import { withAuth } from '../reducers'
 
 export const GET_CALENDAR_SCRIMS_REQUEST = "@@scrims/GET_CALENDAR_SCRIMS_START"
